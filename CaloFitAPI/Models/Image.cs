@@ -7,6 +7,7 @@ namespace CaloFitAPI.Models
     {
         public Image()
         {
+            Ingredients = new HashSet<Ingredient>();
             Recipes = new HashSet<Recipe>();
             Steps = new HashSet<Step>();
         }
@@ -14,7 +15,7 @@ namespace CaloFitAPI.Models
         public int ImageId { get; set; }
         public string? ImageFilename { get; set; }
 
-        public virtual Ingredient? Ingredient { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
         public virtual ICollection<Recipe> Recipes { get; set; }
         public virtual ICollection<Step> Steps { get; set; }
     }
