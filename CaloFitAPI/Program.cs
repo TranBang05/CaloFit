@@ -1,5 +1,7 @@
 using CaloFitAPI.Dto.Mapper;
 using CaloFitAPI.Models;
+using CaloFitAPI.Repository;
+using CaloFitAPI.Repository.Impl;
 using CaloFitAPI.Service;
 using CaloFitAPI.Service.Impl;
 using Microsoft.AspNetCore.OData;
@@ -25,6 +27,8 @@ builder.Services.AddDbContext<CalofitDBContext>(
 
 
 builder.Services.AddScoped<ITest, Test>();
+builder.Services.AddScoped<IDietRepository, DietRepository>();
+builder.Services.AddScoped<IDietService, DietService>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);
 var app = builder.Build();
 
