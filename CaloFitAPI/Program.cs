@@ -1,9 +1,12 @@
 using CaloFitAPI.Dto.Mapper;
 using CaloFitAPI.Models;
+using CaloFitAPI.Repository;
+using CaloFitAPI.Repository.Impl;
 using CaloFitAPI.Service;
 using CaloFitAPI.Service.Impl;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +19,9 @@ builder.Services.AddControllers().AddOData(opt => opt
     .Filter()
     .OrderBy()
     .SetMaxTop(100)
-    );
+    ).AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,6 +30,8 @@ builder.Services.AddDbContext<CalofitDBContext>(
 
 
 builder.Services.AddScoped<ITest, Test>();
+builder.Services.AddScoped<IDietRepository, DietRepository>();
+builder.Services.AddScoped<IDietService, DietService>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);
 var app = builder.Build();
 
