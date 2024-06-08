@@ -1,5 +1,4 @@
-
-CREATE DATABASE CalofitDB;
+CREATE DATABASE CalofitDB COLLATE Latin1_General_100_CI_AS_SC_UTF8;
 GO
 USE CalofitDB;
 GO
@@ -8,29 +7,29 @@ GO
 
 CREATE TABLE Users (
     user_id INT IDENTITY(1,1) PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    [password] VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    [role] VARCHAR(50) NOT NULL,
+    username nvarchAR(50) NOT NULL UNIQUE,
+    [password] nvarchAR(255) NOT NULL,
+    email nvarchAR(255) NOT NULL UNIQUE,
+    [role] nvarchAR(50) NOT NULL,
     registration_date DATETIME NOT NULL DEFAULT GETDATE()
 );
 
 
 CREATE TABLE Diet (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    diet_name NVARCHAR(50) NOT NULL
+    diet_name NvarchAR(50) NOT NULL
 );
 
 
 CREATE TABLE Images (
     image_id INT IDENTITY(1,1) PRIMARY KEY,
-    image_filename VARCHAR(255) NULL
+    image_filename nvarchAR(255) NULL
 );
 
 
 CREATE TABLE Menu (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    menu_name VARCHAR(50) NOT NULL,
+    menu_name nvarchAR(50) NOT NULL,
     diet_id INT NOT NULL,
     FOREIGN KEY (diet_id) REFERENCES Diet(id)
 );
@@ -38,11 +37,11 @@ CREATE TABLE Menu (
 
 CREATE TABLE Recipes (
     recipe_id INT IDENTITY(1,1) PRIMARY KEY,
-    recipe_name VARCHAR(255) NOT NULL,
+    recipe_name nvarchAR(255) NOT NULL,
     servings INT NOT NULL,
     cook_time INT NOT NULL,
     prep_time INT NOT NULL,
-    [description] NVARCHAR(MAX) NULL,
+    [description] NvarchAR(MAX) NULL,
     image_id INT,
     menu_id INT NOT NULL,
     FOREIGN KEY (image_id) REFERENCES Images(image_id),
@@ -66,7 +65,7 @@ CREATE TABLE MealPlan (
     user_id INT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    plan_type VARCHAR(10) NOT NULL CHECK (plan_type IN ('daily', 'weekly')),
+    plan_type nvarchAR(10) NOT NULL CHECK (plan_type IN ('daily', 'weekly')),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -74,7 +73,7 @@ CREATE TABLE MealPlan (
 CREATE TABLE Meal (
     meal_id INT IDENTITY(1,1) PRIMARY KEY,
     plan_id INT NOT NULL,
-    meal_type VARCHAR(50) NOT NULL,
+    meal_type nvarchAR(50) NOT NULL,
     meal_date DATE NOT NULL,
     meal_recipes_id INT NOT NULL,
     FOREIGN KEY (plan_id) REFERENCES MealPlan(plan_id),
@@ -85,7 +84,7 @@ CREATE TABLE Meal (
 CREATE TABLE Allergy (
     allergy_id INT IDENTITY(1,1) PRIMARY KEY,
     user_id INT NOT NULL,
-    allergen VARCHAR(50) NOT NULL,
+    allergen nvarchAR(50) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -102,8 +101,8 @@ CREATE TABLE Recipe_Allergies (
 CREATE TABLE User_Goals (
     user_goal_id INT IDENTITY(1,1) PRIMARY KEY,
     user_id INT NOT NULL,
-    goal_type VARCHAR(50) NOT NULL,
-    goal_details VARCHAR(255) NULL,
+    goal_type nvarchAR(50) NOT NULL,
+    goal_details nvarchAR(255) NULL,
     target_date DATE NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
@@ -111,8 +110,8 @@ CREATE TABLE User_Goals (
 
 CREATE TABLE Ingredients (
     ingredient_id INT IDENTITY(1,1) PRIMARY KEY,
-    [name] VARCHAR(255) NOT NULL,
-    image_id INT UNIQUE NOT NULL,
+    [name] nvarchAR(255) NOT NULL,
+    image_id INT NOT NULL,
     FOREIGN KEY (image_id) REFERENCES Images(image_id)
 );
 
@@ -122,9 +121,9 @@ CREATE TABLE Ingredient_Serving_Sizes (
     ingredient_id INT NOT NULL,
     qty FLOAT NOT NULL,
     scale FLOAT NOT NULL,
-    units VARCHAR(50) NOT NULL,
+    units nvarchAR(50) NOT NULL,
     grams FLOAT NOT NULL,
-    [description] VARCHAR(255) NULL,
+    [description] nvarchAR(255) NULL,
     FOREIGN KEY (ingredient_id) REFERENCES Ingredients(ingredient_id)
 );
 
@@ -155,7 +154,7 @@ CREATE TABLE Step (
     step_id INT IDENTITY(1,1) PRIMARY KEY,
     recipe_id INT NOT NULL,
     step_number INT NOT NULL,
-    [description] NVARCHAR(MAX) NOT NULL,
+    [description] NvarchAR(MAX) NOT NULL,
     image_id INT,
     FOREIGN KEY (recipe_id) REFERENCES Recipes(recipe_id),
     FOREIGN KEY (image_id) REFERENCES Images(image_id)
@@ -166,7 +165,7 @@ CREATE TABLE Comments (
     comment_id INT IDENTITY(1,1) PRIMARY KEY,
     recipe_id INT NOT NULL,
     user_id INT NOT NULL,
-    comment_text NVARCHAR(MAX) NOT NULL,
+    comment_text NvarchAR(MAX) NOT NULL,
     comment_date DATETIME NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (recipe_id) REFERENCES Recipes(recipe_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
