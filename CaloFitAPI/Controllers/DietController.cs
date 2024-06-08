@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 ﻿using CaloFitAPI.Service;
-using Microsoft.AspNetCore.Mvc;
-=======
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +8,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaloFitAPI.Models;
 using Microsoft.AspNetCore.OData.Query;
->>>>>>> 6ac9efca45847d6535e3c4f35e61985ef3d518a7
 
 namespace CaloFitAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-<<<<<<< HEAD
-    public class DietController : Controller
-    {
-        private readonly IDietService _dietService;
-
-        public DietController(IDietService dietService)
-        {
-            _dietService = dietService;
-        }
-
-        [HttpGet("{dietId}")]
-        public IActionResult GetDiet(int dietId)
-        {
-            var diet = _dietService.GetDietWithMenus(dietId);
-=======
     public class DietController : ControllerBase
     {
         private readonly CalofitDBContext _context;
 
+        private readonly IDietService _dietService;
+
         private const int pagesize = 5;
 
-        public DietController(CalofitDBContext context)
+        public DietController(CalofitDBContext context, IDietService dietService)
         {
             _context = context;
+            _dietService = dietService;
         }
 
         // GET: api/Diet
@@ -75,17 +59,12 @@ namespace CaloFitAPI.Controllers
           {
               return NotFound();
           }
-            var diet = await _context.Diets.FindAsync(id);
+            var diet = _dietService.GetDietWithMenus(id);
 
->>>>>>> 6ac9efca45847d6535e3c4f35e61985ef3d518a7
             if (diet == null)
             {
                 return NotFound();
             }
-<<<<<<< HEAD
-            return Ok(diet);
-        }
-=======
 
             return Ok(diet);
         }
@@ -94,6 +73,5 @@ namespace CaloFitAPI.Controllers
         {
             return (_context.Diets?.Any(e => e.Id == id)).GetValueOrDefault();
         }
->>>>>>> 6ac9efca45847d6535e3c4f35e61985ef3d518a7
     }
 }
