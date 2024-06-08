@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace CaloFitAPI.Models
 {
@@ -15,9 +16,7 @@ namespace CaloFitAPI.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int Userid { get; set; }
-
         public virtual User User { get; set; } = null!;
-        [JsonIgnore]
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

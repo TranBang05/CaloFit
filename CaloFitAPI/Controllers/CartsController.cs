@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaloFitAPI.Models;
 using Microsoft.AspNetCore.OData.Query;
+using CaloFitAPI.Dto.Request;
+using AutoMapper;
 
 namespace CaloFitAPI.Controllers
 {
@@ -16,10 +18,12 @@ namespace CaloFitAPI.Controllers
     {
         private const int pagesize = 10;
         private readonly CalofitDBContext _context;
+        private readonly IMapper _mapper;
 
-        public CartsController(CalofitDBContext context)
+        public CartsController(CalofitDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Carts
@@ -87,13 +91,14 @@ namespace CaloFitAPI.Controllers
         // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
+        public async Task<ActionResult<Cart>> PostCart(CartRequest request)
         {
             if (_context.Carts == null)
             {
                 return Problem("Entity set 'CalofitDBContext.Carts'  is null.");
             }
-            cart.Id = 0;
+            request.Id = 0;
+            Cart cart = _mapper.Map<Cart>(request);
             _context.Carts.Add(cart);
             await _context.SaveChangesAsync();
 

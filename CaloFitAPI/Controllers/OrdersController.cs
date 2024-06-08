@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaloFitAPI.Models;
 using CommonService;
+using AutoMapper;
+using CaloFitAPI.Dto.Request;
 
 namespace CaloFitAPI.Controllers
 {
@@ -15,10 +17,12 @@ namespace CaloFitAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly CalofitDBContext _context;
+        private readonly IMapper _mapper;
 
-        public OrdersController(CalofitDBContext context)
+        public OrdersController(CalofitDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Orders
@@ -84,16 +88,17 @@ namespace CaloFitAPI.Controllers
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder(OrderRequest request)
         {
             if (_context.Orders == null)
             {
                 return Problem("Entity set 'CalofitDBContext.Orders'  is null.");
             }
-            if(order.OrderDetails.IsNullOrEmpty())
+            if(request.OrderDetailRequests.IsNullOrEmpty())
             {
                 return NotFound("not found detail");
             }
+            Order order = _mapper.Map<Order>(request);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
