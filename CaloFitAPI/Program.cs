@@ -25,10 +25,17 @@ builder.Services.AddControllers().AddOData(opt => opt
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CalofitDBContext>(
-              options => options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
 
 
+builder.Services.AddScoped<ILogins, Login>();
+builder.Services.AddScoped<ISignup, SignUp>();
+builder.Services.AddScoped<Iusermanagement, userManagement>();
+
+builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
+
+builder.Services.AddScoped<ICreateMeal, CreateMeal>();
+builder.Services.AddScoped<Iforgotpass, ForgotPass>();
+=======
 builder.Services.AddScoped<ITest, Test>();
 builder.Services.AddScoped<IDietRepository, DietRepository>();
 builder.Services.AddScoped<IDietService, DietService>();
