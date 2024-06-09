@@ -6,7 +6,7 @@ using CaloFitAPI.Service;
 using CaloFitAPI.Service.Impl;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +19,8 @@ builder.Services.AddControllers().AddOData(opt => opt
     .Filter()
     .OrderBy()
     .SetMaxTop(100)
-    ).AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+    ).AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CaloFitAPI.Dto.Request;
 using CaloFitAPI.Dto.Response;
 using CaloFitAPI.Models;
 
@@ -24,6 +25,12 @@ namespace CaloFitAPI.Dto.Mapper
 
 
             CreateMap<Nutrition, NutritionReponse>();
+
+            CreateMap<OrderDetailRequest, OrderDetail>();
+            CreateMap<OrderRequest, Order>()
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetailRequests));
+
+            CreateMap<CartRequest, Cart>();
         }
     }
 }

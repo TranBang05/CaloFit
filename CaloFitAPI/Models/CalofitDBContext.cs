@@ -17,6 +17,7 @@ namespace CaloFitAPI.Models
         }
 
         public virtual DbSet<Allergy> Allergies { get; set; } = null!;
+        public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Diet> Diets { get; set; } = null!;
         public virtual DbSet<Image> Images { get; set; } = null!;
@@ -26,6 +27,8 @@ namespace CaloFitAPI.Models
         public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
         public virtual DbSet<Menu> Menus { get; set; } = null!;
         public virtual DbSet<Nutrition> Nutritions { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Recipe> Recipes { get; set; } = null!;
         public virtual DbSet<RecipeAllergy> RecipeAllergies { get; set; } = null!;
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
@@ -46,6 +49,8 @@ namespace CaloFitAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.UseCollation("Latin1_General_100_CI_AS_SC_UTF8");
+
             modelBuilder.Entity<Allergy>(entity =>
             {
                 entity.ToTable("Allergy");
@@ -54,7 +59,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Allergen)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("allergen");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -64,6 +68,29 @@ namespace CaloFitAPI.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Allergy__user_id__534D60F1");
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Orderid).HasColumnName("orderid");
+
+                entity.Property(e => e.Userid).HasColumnName("userid");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cart_Order");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cart_Users");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -85,13 +112,13 @@ namespace CaloFitAPI.Models
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comments__recipe__6FE99F9F");
+                    .HasConstraintName("FK__Comments__recipe__6EF57B66");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comments__user_i__70DDC3D8");
+                    .HasConstraintName("FK__Comments__user_i__6FE99F9F");
             });
 
             modelBuilder.Entity<Diet>(entity =>
@@ -111,35 +138,30 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.ImageFilename)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("image_filename");
             });
 
             modelBuilder.Entity<Ingredient>(entity =>
             {
-                entity.HasIndex(e => e.ImageId, "UQ__Ingredie__DC9AC954347E5B90")
-                    .IsUnique();
-
                 entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
 
                 entity.Property(e => e.ImageId).HasColumnName("image_id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("name");
 
                 entity.HasOne(d => d.Image)
-                    .WithOne(p => p.Ingredient)
-                    .HasForeignKey<Ingredient>(d => d.ImageId)
+                    .WithMany(p => p.Ingredients)
+                    .HasForeignKey(d => d.ImageId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ingredien__image__5DCAEF64");
+                    .HasConstraintName("FK__Ingredien__image__5CD6CB2B");
             });
 
             modelBuilder.Entity<IngredientServingSize>(entity =>
             {
                 entity.HasKey(e => e.ServingSizeId)
-                    .HasName("PK__Ingredie__0A1ADB4F5FC04B33");
+                    .HasName("PK__Ingredie__0A1ADB4F8957E588");
 
                 entity.ToTable("Ingredient_Serving_Sizes");
 
@@ -147,7 +169,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("description");
 
                 entity.Property(e => e.Grams).HasColumnName("grams");
@@ -160,14 +181,13 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Units)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("units");
 
                 entity.HasOne(d => d.Ingredient)
                     .WithMany(p => p.IngredientServingSizes)
                     .HasForeignKey(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ingredien__ingre__60A75C0F");
+                    .HasConstraintName("FK__Ingredien__ingre__5FB337D6");
             });
 
             modelBuilder.Entity<Meal>(entity =>
@@ -184,7 +204,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.MealType)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("meal_type");
 
                 entity.Property(e => e.PlanId).HasColumnName("plan_id");
@@ -205,7 +224,7 @@ namespace CaloFitAPI.Models
             modelBuilder.Entity<MealPlan>(entity =>
             {
                 entity.HasKey(e => e.PlanId)
-                    .HasName("PK__MealPlan__BE9F8F1D87B1222A");
+                    .HasName("PK__MealPlan__BE9F8F1D61D50892");
 
                 entity.ToTable("MealPlan");
 
@@ -217,7 +236,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.PlanType)
                     .HasMaxLength(10)
-                    .IsUnicode(false)
                     .HasColumnName("plan_type");
 
                 entity.Property(e => e.StartDate)
@@ -243,7 +261,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.MenuName)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("menu_name");
 
                 entity.HasOne(d => d.Diet)
@@ -256,7 +273,7 @@ namespace CaloFitAPI.Models
             modelBuilder.Entity<Nutrition>(entity =>
             {
                 entity.HasKey(e => e.IngredientId)
-                    .HasName("PK__Nutritio__B0E453CF1F9E5774");
+                    .HasName("PK__Nutritio__B0E453CFD758EF2C");
 
                 entity.Property(e => e.IngredientId)
                     .ValueGeneratedNever()
@@ -276,7 +293,53 @@ namespace CaloFitAPI.Models
                     .WithOne(p => p.Nutrition)
                     .HasForeignKey<Nutrition>(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Nutrition__ingre__6383C8BA");
+                    .HasConstraintName("FK__Nutrition__ingre__628FA481");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("Order");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("date")
+                    .HasColumnName("date");
+
+                entity.Property(e => e.Userid).HasColumnName("userid");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Order_Users");
+            });
+
+            modelBuilder.Entity<OrderDetail>(entity =>
+            {
+                entity.ToTable("OrderDetail");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Orderid).HasColumnName("orderid");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.Property(e => e.ProductId).HasColumnName("productId");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderDetail_Order");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderDetail_Ingredients");
             });
 
             modelBuilder.Entity<Recipe>(entity =>
@@ -295,7 +358,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.RecipeName)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("recipe_name");
 
                 entity.Property(e => e.Servings).HasColumnName("servings");
@@ -351,25 +413,25 @@ namespace CaloFitAPI.Models
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__ingre__6754599E");
+                    .HasConstraintName("FK__Recipe_In__ingre__66603565");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__recip__66603565");
+                    .HasConstraintName("FK__Recipe_In__recip__656C112C");
 
                 entity.HasOne(d => d.ServingSize)
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.ServingSizeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__servi__68487DD7");
+                    .HasConstraintName("FK__Recipe_In__servi__6754599E");
             });
 
             modelBuilder.Entity<RecipeRating>(entity =>
             {
                 entity.HasKey(e => e.RatingId)
-                    .HasName("PK__Recipe_R__D35B278B5F73AD70");
+                    .HasName("PK__Recipe_R__D35B278B75373A8B");
 
                 entity.ToTable("Recipe_Ratings");
 
@@ -390,13 +452,13 @@ namespace CaloFitAPI.Models
                     .WithMany(p => p.RecipeRatings)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Ra__recip__75A278F5");
+                    .HasConstraintName("FK__Recipe_Ra__recip__74AE54BC");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.RecipeRatings)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Ra__user___76969D2E");
+                    .HasConstraintName("FK__Recipe_Ra__user___75A278F5");
             });
 
             modelBuilder.Entity<Step>(entity =>
@@ -416,33 +478,31 @@ namespace CaloFitAPI.Models
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.ImageId)
-                    .HasConstraintName("FK__Step__image_id__6C190EBB");
+                    .HasConstraintName("FK__Step__image_id__6B24EA82");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Step__recipe_id__6B24EA82");
+                    .HasConstraintName("FK__Step__recipe_id__6A30C649");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Users__AB6E6164853EA7CC")
+                entity.HasIndex(e => e.Email, "UQ__Users__AB6E61646800B2CC")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Username, "UQ__Users__F3DBC572B00A3557")
+                entity.HasIndex(e => e.Username, "UQ__Users__F3DBC57203525822")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("email");
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("password");
 
                 entity.Property(e => e.RegistrationDate)
@@ -452,12 +512,10 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Role)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("role");
 
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("username");
             });
 
@@ -469,12 +527,10 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.GoalDetails)
                     .HasMaxLength(255)
-                    .IsUnicode(false)
                     .HasColumnName("goal_details");
 
                 entity.Property(e => e.GoalType)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .HasColumnName("goal_type");
 
                 entity.Property(e => e.TargetDate)
