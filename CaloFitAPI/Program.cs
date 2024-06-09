@@ -20,8 +20,7 @@ builder.Services.AddControllers().AddOData(opt => opt
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CalofitDBContext>(
-              options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyConStr")));
+
 
 builder.Services.AddScoped<ILogins, Login>();
 builder.Services.AddScoped<ISignup, SignUp>();
