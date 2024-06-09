@@ -21,10 +21,16 @@ builder.Services.AddControllers().AddOData(opt => opt
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CalofitDBContext>(
-              options => options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
+              options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyConStr")));
 
+builder.Services.AddScoped<ILogins, Login>();
+builder.Services.AddScoped<ISignup, SignUp>();
+builder.Services.AddScoped<Iusermanagement, userManagement>();
 
-builder.Services.AddScoped<ITest, Test>();
+builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
+
+builder.Services.AddScoped<ICreateMeal, CreateMeal>();
+builder.Services.AddScoped<Iforgotpass, ForgotPass>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);
 var app = builder.Build();
 
