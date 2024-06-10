@@ -35,8 +35,7 @@ builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
 
 builder.Services.AddScoped<ICreateMeal, CreateMeal>();
 builder.Services.AddScoped<Iforgotpass, ForgotPass>();
-=======
-builder.Services.AddScoped<ITest, Test>();
+//builder.Services.AddScoped<ITest, Test>();
 builder.Services.AddScoped<IDietRepository, DietRepository>();
 builder.Services.AddScoped<IDietService, DietService>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);

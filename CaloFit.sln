@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaloFitAPI", "CaloFitAPI\CaloFitAPI.csproj", "{968B19FF-EE9C-4A53-94D0-4ADA38E99107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaloFitAPI", "CaloFitAPI\CaloFitAPI.csproj", "{968B19FF-EE9C-4A53-94D0-4ADA38E99107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalofitMVC", "CalofitMVC\CalofitMVC.csproj", "{22A10CF8-05B3-4866-A79D-193DA18648EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{968B19FF-EE9C-4A53-94D0-4ADA38E99107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968B19FF-EE9C-4A53-94D0-4ADA38E99107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968B19FF-EE9C-4A53-94D0-4ADA38E99107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A10CF8-05B3-4866-A79D-193DA18648EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A10CF8-05B3-4866-A79D-193DA18648EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A10CF8-05B3-4866-A79D-193DA18648EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A10CF8-05B3-4866-A79D-193DA18648EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
