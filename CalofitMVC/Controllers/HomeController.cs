@@ -15,7 +15,7 @@ namespace CalofitMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Cart", 2);
         }
 
         public IActionResult Privacy()

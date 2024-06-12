@@ -26,7 +26,7 @@ builder.Services.AddControllers().AddOData(opt => opt
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddDbContext<CalofitDBContext>();
 builder.Services.AddScoped<ILogins, Login>();
 builder.Services.AddScoped<ISignup, SignUp>();
 builder.Services.AddScoped<Iusermanagement, userManagement>();
