@@ -17,7 +17,6 @@ namespace CalofitMVC.Models
         }
 
         public virtual DbSet<Allergy> Allergies { get; set; } = null!;
-        public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Diet> Diets { get; set; } = null!;
         public virtual DbSet<Image> Images { get; set; } = null!;
@@ -43,7 +42,7 @@ namespace CalofitMVC.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=DESKTOP-7DM08OD\\SQLEXPRESS;database=CalofitDB;user=sa;password=123456;TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer("server=DESKTOP-7DM08OD\\SQLEXPRESS;database=CalofitDB;user=sa;password=123456;TrustServerCertificate=true;");
             }
         }
 
@@ -68,29 +67,6 @@ namespace CalofitMVC.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Allergy__user_id__534D60F1");
-            });
-
-            modelBuilder.Entity<Cart>(entity =>
-            {
-                entity.ToTable("Cart");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Orderid).HasColumnName("orderid");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
-
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.Carts)
-                    .HasForeignKey(d => d.Orderid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cart_Order");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Carts)
-                    .HasForeignKey(d => d.Userid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cart_Users");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -517,6 +493,23 @@ namespace CalofitMVC.Models
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
                     .HasColumnName("username");
+
+                entity.HasMany(d => d.Products)
+                    .WithMany(p => p.Users)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "Cart",
+                        l => l.HasOne<Ingredient>().WithMany().HasForeignKey("Productid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Cart_Ingredients"),
+                        r => r.HasOne<User>().WithMany().HasForeignKey("Userid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Cart_Users"),
+                        j =>
+                        {
+                            j.HasKey("Userid", "Productid").HasName("PK_Cart_1");
+
+                            j.ToTable("Cart");
+
+                            j.IndexerProperty<int>("Userid").HasColumnName("userid");
+
+                            j.IndexerProperty<int>("Productid").HasColumnName("productid");
+                        });
             });
 
             modelBuilder.Entity<UserGoal>(entity =>

@@ -10,6 +10,7 @@ namespace CaloFitAPI.Models
             IngredientServingSizes = new HashSet<IngredientServingSize>();
             OrderDetails = new HashSet<OrderDetail>();
             RecipeIngredients = new HashSet<RecipeIngredient>();
+            Users = new HashSet<User>();
         }
 
         public int IngredientId { get; set; }
@@ -21,5 +22,7 @@ namespace CaloFitAPI.Models
         public virtual ICollection<IngredientServingSize> IngredientServingSizes { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }
