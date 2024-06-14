@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CalofitMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CalofitMVC.Controllers
 {
@@ -8,6 +10,8 @@ namespace CalofitMVC.Controllers
         // GET: ShopController
         public ActionResult Index()
         {
+            CalofitDBContext db = new CalofitDBContext();
+            ViewData["list"] = db.Products.Include(x => x.Ingredient).ToList();
             return View("shop");
         }
 
@@ -20,7 +24,15 @@ namespace CalofitMVC.Controllers
         // GET: ShopController/Create
         public ActionResult Create()
         {
-            return View();
+
+            return RedirectToAction("Create","Cart","");
+        }
+        public ActionResult Cart(int id)
+        {
+            CalofitDBContext db = new CalofitDBContext();
+            Product p = db.Products.Include(x => x.Ingredient).FirstOrDefault(x => x.IngredientId == id);
+            
+            return RedirectToAction("Create", "Cart", new {id = id});
         }
 
         // POST: ShopController/Create

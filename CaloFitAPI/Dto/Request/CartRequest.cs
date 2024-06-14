@@ -4,9 +4,9 @@ namespace CaloFitAPI.Dto.Request
 {
     public class CartRequest
     {
-        public int Id { get; set; }
         public int Userid { get; set; }
-        public int Orderid { get; set; }
+        public int Productid { get; set; }
+        public double? Quantity { get; set; }
 
     }
 }

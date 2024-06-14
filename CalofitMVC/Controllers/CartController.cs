@@ -1,16 +1,19 @@
-﻿using CalofitMVC.Models;
+﻿using CaloFitAPI.Dto.Request;
+using CalofitMVC.Models;
 using Flurl;
 using Flurl.Http;
 using Flurl.Http.Newtonsoft;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa;
+using Rotativa.AspNetCore;
 using static System.Net.WebRequestMethods;
 
 namespace CalofitMVC.Controllers
 {
     public class CartController : Controller
     {
-        public string link = "http://localhost:5150/api/Carts/User";
+        public string link = "http://localhost:5150/api/Carts";
         private NewtonsoftJsonSerializer serializer;
         public CartController()
         {
@@ -19,10 +22,16 @@ namespace CalofitMVC.Controllers
         // GET: CartController
         public ActionResult Index(int userid = 1)
         {
-            List<Cart> carts = link.AppendPathSegment(userid)
+            List<Cart> carts = getAll(userid);
+            ViewData["list"] = carts;
+            return View("Cart");
+        }
+
+        private List<Cart> getAll(int userid)
+        {
+            return link.AppendPathSegments("/User", userid)
                .WithSettings(s => s.JsonSerializer = serializer)
                .GetJsonAsync<List<Cart>>().Result;
-            return View(carts);
         }
 
         // GET: CartController/Details/5
@@ -32,24 +41,49 @@ namespace CalofitMVC.Controllers
         }
 
         // GET: CartController/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            CartRequest cart = new()
+            {
+                Productid = id,
+                Userid = HttpContext.Session.GetInt32("user") ?? 1,
+                Quantity = 1
+            };
+            ;
+            return Create(cart);
         }
-
         // POST: CartController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CartRequest cart)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                List<Cart> carts = getAll(cart.Userid);
+                if(carts.FirstOrDefault(x => x.Productid == cart.Productid) != null)
+                {
+                    return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
+                }
+                var abc = link.WithSettings(s => s.JsonSerializer = serializer)
+                    .PostJsonAsync(cart);
+
             }
-            catch
+            catch (FlurlHttpException ex)
             {
-                return View();
+                var err = ex.GetResponseJsonAsync<Exception>(); // or GetResponseStringAsync(), etc.
+                Console.WriteLine($"Error returned from {ex.Call.Request.Url}: {err.Result.Message}");
             }
+            return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
+        }
+        public ActionResult ShopList(int userId)
+        {
+            List<Cart> carts = getAll(userId);
+            return new ViewAsPdf("shoplist", carts) { FileName = "Test.pdf" };
+        }
+        public IActionResult ShoppingList(int userId)
+        {
+            List<Cart> carts = getAll(userId);
+            return View("shoplist", carts);
         }
 
         // GET: CartController/Edit/5
@@ -74,9 +108,12 @@ namespace CalofitMVC.Controllers
         }
 
         // GET: CartController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int productId)
         {
-            return View();
+            int userid = HttpContext.Session.GetInt32("user") ?? 1;
+            var abc = await link.AppendPathSegments(productId, userid).DeleteAsync();
+            TempData["mess"] = "deleted item";
+            return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
         }
 
         // POST: CartController/Delete/5

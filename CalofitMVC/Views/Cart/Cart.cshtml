@@ -1,4 +1,4 @@
-@model Cart
+@model Order
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -13,7 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/icon.ico" />
 
     <!-- CSS
-	============================================ -->
+    ============================================ -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" />
     <!-- FontAwesome -->
@@ -122,9 +122,10 @@
                                             <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/cai-bo-xoi.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/cai-bo-xoi.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -143,9 +144,10 @@
                                                 </div>
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/viet-quat.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/viet-quat.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -164,9 +166,10 @@
                                                 </div>
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/hanh-nhan.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/hanh-nhan.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -185,8 +188,10 @@
                                                 </div>
                                                 <div class="cart-links d-flex justify-content-center">
                                                     <a class="obrien-button white-btn" href="~/Cart">Giỏ hàng</a>
-                                                    <a class="obrien-button white-btn" href="~/Order">Thanh
-                                                        toán</a>
+                                                    <a class="obrien-button white-btn" href="~/Order">
+                                                        Thanh
+                                                        toán
+                                                    </a>
                                                 </div>
                                             </div>
                                         </li>
@@ -283,9 +288,10 @@
                                             <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/cai-bo-xoi.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/cai-bo-xoi.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -304,9 +310,10 @@
                                                 </div>
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/viet-quat.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/viet-quat.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -325,9 +332,10 @@
                                                 </div>
                                                 <div class="single-cart-item">
                                                     <div class="cart-img">
-                                                        <a href="cart.html"><img
-                                                                src="assets/images/ingredient/hanh-nhan.jpg"
-                                                                alt="" /></a>
+                                                        <a href="cart.html">
+                                                            <img src="assets/images/ingredient/hanh-nhan.jpg"
+                                                                 alt="" />
+                                                        </a>
                                                     </div>
                                                     <div class="cart-text">
                                                         <h5 class="title">
@@ -346,8 +354,10 @@
                                                 </div>
                                                 <div class="cart-links d-flex justify-content-center">
                                                     <a class="obrien-button white-btn" href="~/Cart">Giỏ hàng</a>
-                                                    <a class="obrien-button white-btn" href="~/Order">Thanh
-                                                        toán</a>
+                                                    <a class="obrien-button white-btn" href="~/Order">
+                                                        Thanh
+                                                        toán
+                                                    </a>
                                                 </div>
                                             </div>
                                         </li>
@@ -481,47 +491,35 @@
                             </thead>
                             <tbody>
                                 <form id="order" method="post" asp-action="Create" asp-controller="Order">
-                                @foreach(Cart cart in ViewData["list"] as List<Cart>)
-                                {
-                                    @foreach (OrderDetail detail in cart.Order.OrderDetails)
+                                    @foreach (Cart cart in ViewData["list"] as List<Cart>)
                                     {
-                                        <tr>
-                                            <td class="pro-thumbnail">
-                                                <a href="#">
-                                                    <img class="img-fluid"
-                                                    src="assets/images/ingredient/cai-bo-xoi.jpg" alt="Product" />
-                                                </a>
-                                            </td>
-                                            <td class="pro-title"><a asp-controller="Product" asp-action="Details" asp-route-id="@detail.ProductId">@detail.Product.Name</a></td>
-                                            <td class="pro-price" id="price"><span>@detail.Price</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" id="quantity" value="@detail.Quantity" type="text">
-                                                        <div class="dec qtybutton" onclick="updateSum()">-</div>
-                                                        <div class="inc qtybutton" onclick="updateSum()">+</div>
-                                                        <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
-                                                        <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
-                                                    </div>
+                                    <tr>
+                                        <td class="pro-thumbnail">
+                                            <a href="#">
+                                                <img class="img-fluid"
+                                                     src="assets/images/ingredient/cai-bo-xoi.jpg" alt="Product" />
+                                            </a>
+                                        </td>
+                                        <td class="pro-title"><a asp-controller="Product" asp-action="Details" asp-route-id="@cart.Productid">@cart.Product.Ingredient.Name</a></td>
+                                        <td class="pro-price" id="price"><span>@cart.Product.Price</span></td>
+                                        <td class="pro-quantity">
+                                            <div class="quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" id="quantity" value="@cart.Quantity" type="text">
+                                                    <div class="dec qtybutton">-</div>
+                                                    <div class="inc qtybutton">+</div>
+                                                    <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
+                                                    <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
                                                 </div>
-                                            </td>
-                                            <td class="pro-subtotal"><span id="sum">@(detail.Quantity * detail.Price)</span></td>
-                                            <td class="pro-remove"><a asp-action=""><i class="ion-trash-b"></i></a></td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                        <td class="pro-subtotal"><span class="sum">@(cart.Product.Price * 1)</span></td>
+                                        <td class="pro-remove"><a asp-action="Delete" asp-route-productId="@cart.Productid"><i class="ion-trash-b"></i></a></td>
+                                    </tr>
                                     }
-                                }
                                 </form>
                             </tbody>
                         </table>
-                        <script>
-                            function updateSum() {
-                                const price = document.getElementById('price').value;
-                                const quantity = document.getElementById('quantity').value;
-                                console.log(quantity);
-                                alert(quantity);
-                                // document.getElementById('sum').textContent = price * quantity;
-                            }
-                        </script>
                     </div>
                     <!-- Cart Update Option -->
                     <div class="cart-update-option d-block d-md-flex justify-content-between">
@@ -547,7 +545,7 @@
                                 <table class="table">
                                     <tr>
                                         <td>Tổng giá</td>
-                                        <td>$60.000</td>
+                                        <td id="total"></td>
                                     </tr>
                                     <tr>
                                         <td>Phí giao hàng</td>
@@ -560,7 +558,9 @@
                                 </table>
                             </div>
                         </div>
-                        <a href="~/Order" class="btn obrien-button primary-btn d-block">Mua hàng</a>
+                        <button type="submit" form="order">
+                            <a asp-action="ShopList" asp-route-userId="@(Context.Session.GetInt32("user") ?? 1)" class="btn obrien-button primary-btn d-block">Lấy danh sách mua sắm</a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -634,8 +634,7 @@
                         </div>
                     </div>
                     <!-- Second Column -->
-                    <div
-                        class="col-12 col-md-4 col-lg-4 col-custom text-center d-flex align-items-center justify-content-center">
+                    <div class="col-12 col-md-4 col-lg-4 col-custom text-center d-flex align-items-center justify-content-center">
                         <div class="single-footer-widget">
                             <h2 class="widget-title">Link</h2>
                             <ul class="widget-list">
@@ -746,8 +745,10 @@
                                                 </div>
                                             </div>
                                             <div class="add-to_cart">
-                                                <a class="btn obrien-button primary-btn" href="cart.html">Add to
-                                                    cart</a>
+                                                <a class="btn obrien-button primary-btn" href="cart.html">
+                                                    Add to
+                                                    cart
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -760,16 +761,13 @@
         </div>
     </div>
     <!-- Modal Area End Here -->
-
     <!-- Scroll to Top Start -->
     <a class="scroll-to-top" href="#">
         <i class="ion-chevron-up"></i>
     </a>
     <!-- Scroll to Top End -->
-
     <!-- JS
       ============================================ -->
-
     <!-- jQuery JS -->
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <!-- jQuery Migrate JS -->
@@ -793,6 +791,14 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    @if (TempData["mess"] != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("@TempData["mess"]");
+            }
+        </script>
+    }
 </body>
 
 </html>

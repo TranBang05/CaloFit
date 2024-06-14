@@ -17,6 +17,7 @@ namespace CaloFitAPI.Models
         }
 
         public virtual DbSet<Allergy> Allergies { get; set; } = null!;
+        public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Diet> Diets { get; set; } = null!;
         public virtual DbSet<Image> Images { get; set; } = null!;
@@ -28,6 +29,7 @@ namespace CaloFitAPI.Models
         public virtual DbSet<Nutrition> Nutritions { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Recipe> Recipes { get; set; } = null!;
         public virtual DbSet<RecipeAllergy> RecipeAllergies { get; set; } = null!;
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
@@ -67,6 +69,32 @@ namespace CaloFitAPI.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Allergy__user_id__534D60F1");
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(e => new { e.Userid, e.Productid })
+                    .HasName("PK_Cart_1");
+
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Userid).HasColumnName("userid");
+
+                entity.Property(e => e.Productid).HasColumnName("productid");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Productid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cart_Ingredients");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cart_Users");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -299,8 +327,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Orderid).HasColumnName("orderid");
 
-                entity.Property(e => e.Price).HasColumnName("price");
-
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
@@ -316,6 +342,25 @@ namespace CaloFitAPI.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_Ingredients");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.HasKey(e => e.IngredientId);
+
+                entity.ToTable("Product");
+
+                entity.Property(e => e.IngredientId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ingredient_id");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.HasOne(d => d.Ingredient)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.IngredientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Product_Ingredients");
             });
 
             modelBuilder.Entity<Recipe>(entity =>
@@ -493,23 +538,6 @@ namespace CaloFitAPI.Models
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
                     .HasColumnName("username");
-
-                entity.HasMany(d => d.Products)
-                    .WithMany(p => p.Users)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "Cart",
-                        l => l.HasOne<Ingredient>().WithMany().HasForeignKey("Productid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Cart_Ingredients"),
-                        r => r.HasOne<User>().WithMany().HasForeignKey("Userid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Cart_Users"),
-                        j =>
-                        {
-                            j.HasKey("Userid", "Productid").HasName("PK_Cart_1");
-
-                            j.ToTable("Cart");
-
-                            j.IndexerProperty<int>("Userid").HasColumnName("userid");
-
-                            j.IndexerProperty<int>("Productid").HasColumnName("productid");
-                        });
             });
 
             modelBuilder.Entity<UserGoal>(entity =>
