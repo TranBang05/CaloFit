@@ -14,7 +14,7 @@ namespace CaloFitAPI.Repository.Impl
 
 
         
-        public Diet getDietById(int dietId)
+        public List<Diet> getDietById(int dietId)
         {
             return _dbContext.Diets
                 .Include(d => d.Menus)
@@ -30,7 +30,22 @@ namespace CaloFitAPI.Repository.Impl
                         .ThenInclude(r => r.RecipeIngredients)
                             .ThenInclude(ri => ri.Ingredient) 
                                 .ThenInclude(i => i.IngredientServingSizes)
-                .FirstOrDefault(d => d.Id == dietId);
+                .ToList();
+
+        }
+
+     
+        public List<Recipe> getRecipe()
+        {
+            return _dbContext.Recipes
+                            .Include(r => r.Steps)
+                            .Include(r => r.RecipeIngredients)
+                                .ThenInclude(ri => ri.Ingredient)
+                                    .ThenInclude(i => i.Nutrition)
+                            .Include(r => r.RecipeIngredients)
+                                .ThenInclude(ri => ri.Ingredient)
+                                    .ThenInclude(i => i.IngredientServingSizes)
+                            .ToList();
         }
     }
 }

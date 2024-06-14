@@ -25,13 +25,14 @@ namespace CaloFitAPI.Controllers
         {
 
             bool login = _login.Login(username,password);
-
-        
             if (login == false)
             {
                 return Unauthorized();
             }
-          
+            int userId = _login.GetUserId(username);
+      
+            HttpContext.Session.SetInt32("UserId", userId);
+
             return Ok("sucess");
         }
     }

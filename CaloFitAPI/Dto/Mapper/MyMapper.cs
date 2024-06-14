@@ -11,8 +11,9 @@ namespace CaloFitAPI.Dto.Mapper
         {
             CreateMap<Diet, DietResponse>();
             CreateMap<Menu, MenuResponse>();
-            CreateMap<Recipe, RecipeResponse>();
-            CreateMap<Step, StepResponse>();
+            CreateMap<Recipe, RecipeResponse>()
+                .ForMember(dest => dest.ImageId, opt => opt.MapFrom(src => src.Image.ImageFilename));
+			CreateMap<Step, StepResponse>();
             CreateMap<RecipeIngredient, RecipeIngredientResponse>();
 
 

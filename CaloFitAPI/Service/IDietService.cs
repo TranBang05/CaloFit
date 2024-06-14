@@ -4,6 +4,6 @@ namespace CaloFitAPI.Service
 {
     public interface IDietService
     {
-        DietResponse GetDietWithMenus(int dietId);
+       List<RecipeResponse> GetRecipe();
     }
 }

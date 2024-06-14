@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaloFitAPI.Models;
 using Microsoft.AspNetCore.OData.Query;
+using CaloFitAPI.Dto.Response;
 
 namespace CaloFitAPI.Controllers
 {
@@ -50,16 +51,15 @@ namespace CaloFitAPI.Controllers
             return Ok(await _context.UserPreferences.Where(x => x.UserId == userId).Select(x => x.Diet).ToListAsync());
         }
 
-        // GET: api/Diet/5
-        [HttpGet("{id}")]
+        [HttpGet("recipe")]
         [EnableQuery(PageSize = pagesize)]
-        public async Task<ActionResult<Diet>> GetDiet(int id)
+        public async Task<ActionResult<RecipeResponse>> GetDiet()
         {
           if (_context.Diets == null)
           {
               return NotFound();
           }
-            var diet = _dietService.GetDietWithMenus(id);
+            var diet = _dietService.GetRecipe();
 
             if (diet == null)
             {

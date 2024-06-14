@@ -36,7 +36,7 @@ namespace CaloFitAPI.Service.Impl
                             .ThenInclude(ra => ra.Allergy)
                 .ToList();
 
-            var createMealPlans = mealPlans.Where(pis => pis.PlanId == request.week)
+            var createMealPlans = mealPlans.Where(pis => pis.PlanType == request.dailyorweek)
 
 
                 .Select(mealPlan => new CreateMealPlan
@@ -63,7 +63,7 @@ namespace CaloFitAPI.Service.Impl
                         UserId = up.UserId,
                         DietId = up.DietId,
                         FavoriteRecipesId = up.FavoriteRecipesId
-                    }).Where(up => up.DietId == request.DietId || up.UserPreferenceId == request.favor).
+                    }).Where(up => up.DietId == request.DietId).
                     ToList(),
                             step = m.MealRecipes.Steps.Select(s => new StepDto
                             {

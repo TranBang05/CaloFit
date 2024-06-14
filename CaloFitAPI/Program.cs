@@ -22,6 +22,11 @@ builder.Services.AddControllers().AddOData(opt => opt
     ).AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+
+
+builder.Services.AddDbContext<CalofitDBContext>(
+              options => options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,6 +34,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CalofitDBContext>();
 builder.Services.AddScoped<ILogins, Login>();
 builder.Services.AddScoped<ISignup, SignUp>();
+builder.Services.AddScoped<IAllegic,AllegicSevices>();
 builder.Services.AddScoped<Iusermanagement, userManagement>();
 
 builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
@@ -39,6 +45,21 @@ builder.Services.AddScoped<Iforgotpass, ForgotPass>();
 builder.Services.AddScoped<IDietRepository, DietRepository>();
 builder.Services.AddScoped<IDietService, DietService>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);
+builder.Services.AddHttpContextAccessor();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+// Register session services
+builder.Services.AddSession(options =>
+{
+    // Set a short timeout for easy testing.
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    // Make the session cookie essential
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,6 +69,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllers();

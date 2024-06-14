@@ -21,12 +21,11 @@ namespace CaloFitAPI.Controllers
              
         }
         [HttpPost]
-        public IActionResult CreateMeal(CreateRecipesRequest request)
+        public IActionResult CreateMeal(CreateRecipesRequest request, [FromServices] IHttpContextAccessor httpContextAccessor)
         {
-          
-
             try
             {
+                var session = httpContextAccessor.HttpContext.Session;
                 var result = _createMeal.getMealDay(request);
                 return Ok(result);
             }
@@ -34,6 +33,7 @@ namespace CaloFitAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+
         }
     }
 }

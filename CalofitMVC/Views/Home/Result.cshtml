@@ -1,0 +1,741 @@
+﻿<html>
+
+<head>
+    <link href="https://arimai.github.io/meal-planner/static/css/main.a9fa28ce.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Calofit</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/icon.ico" />
+
+    <!-- CSS
+    ============================================ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="~/assets/css/vendor/font.awesome.min.css" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/assets/css/vendor/ionicons.min.css" />
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/slick.min.css" />
+    <!-- Animation -->
+    <link rel="stylesheet" href="~/assets/css/plugins/animate.min.css" />
+    <!-- jQuery Ui -->
+    <link rel="stylesheet" href="~/assets/css/plugins/jquery-ui.min.css" />
+    <!-- Nice Select -->
+    <link rel="stylesheet" href="~/assets/css/plugins/nice-select.min.css" />
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/assets/css/plugins/magnific-popup.css" />
+
+    <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from the above) -->
+
+    <link rel="stylesheet" href="~/assets/css/vendor/vendor.min.css" />
+    <link rel="stylesheet" href="~/assets/css/plugins/plugins.min.css" />
+
+    <!-- Main Style CSS (Please use minify version for better website load performance) -->
+    <link rel="stylesheet" href="~/assets/css/style.css" />
+    <!-- <link rel="stylesheet" href="~/assets/css/style.min.css"> -->
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        <div>
+            <div class="Plan">
+                <!-- Main Header Area Start -->
+                <div class="main-header">
+                    <div class="container container-default custom-area">
+                        <div class="row">
+                            <div class="col-lg-12 col-custom">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-2 col-xl-2 col-sm-6 col-6 col-custom">
+                                        <div class="header-logo d-flex align-items-center">
+                                            <a href="index.html">
+                                                <img class="img-full" src="~/assets/images/logo1.png" alt="Header Logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-7 position-static d-none d-lg-block col-custom">
+                                        <nav class="main-nav d-flex justify-content-center">
+                                            <ul class="nav">
+                                                <li>
+                                                    <a class="active" href="index.html">
+                                                        <span class="menu-text">Trang chủ</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <span class="menu-text">Các sản phẩm</span>
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-submenu dropdown-hover">
+                                                        <li>
+                                                            <a href="shop.html">Cửa hàng nguyên liệu</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="meal-planner.html">Lập kế hoạch ăn uống</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="nutrition.html">Phân tích dinh dưỡng</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="recipe.html">Công thức nấu ăn</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="blog-grid-fullwidth.html">
+                                                        <span class="menu-text"> Blog</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="contact-us.html">
+                                                        <span class="menu-text">Liên hệ</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="partners.html">
+                                                        <span class="menu-text">Đối tác</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="pricing.html">
+                                                        <span class="menu-text">Giá cả</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="col-lg-2 col-xl-3 col-sm-6 col-6 col-custom">
+                                        <div class="header-right-area main-nav">
+                                            <ul class="nav">
+                                                <li class="login-register-wrap d-none d-xl-flex">
+                                                    <span><a href="login.html">Đăng nhập</a></span>
+                                                    <span><a href="register.html">Đăng ký</a></span>
+                                                </li>
+                                                <li class="minicart-wrap">
+                                                    <a href="#" class="minicart-btn toolbar-btn">
+                                                        <i class="ion-bag"></i>
+                                                        <span class="cart-item_count">3</span>
+                                                    </a>
+                                                    <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/cai-bo-xoi.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html">Cải bó xôi</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>2×</span>
+                                                                        <span class="cart-price">60,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/viet-quat.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html" title="Blueberry">Việt quất</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>1×</span>
+                                                                        <span class="cart-price">355,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/hanh-nhan.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html">Hạnh nhân</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>1×</span>
+                                                                        <span class="cart-price">350,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cart-links d-flex justify-content-center">
+                                                            <a class="obrien-button white-btn" href="cart.html">
+                                                                Giỏ
+                                                                hàng
+                                                            </a>
+                                                            <a class="obrien-button white-btn"
+                                                               href="checkout.html">Thanh toán</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="mobile-menu-btn d-lg-none">
+                                                    <a class="off-canvas-btn" href="#">
+                                                        <i class="fa fa-bars"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Header Area End -->
+                <!-- Sticky Header Start Here-->
+                <div class="main-header header-sticky">
+                    <div class="container container-default custom-area">
+                        <div class="row">
+                            <div class="col-lg-12 col-custom">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-2 col-xl-2 col-sm-6 col-6 col-custom">
+                                        <div class="header-logo">
+                                            <a href="index.html">
+                                                <img class="img-full" src="~/assets/images/logo1.png" alt="Header Logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-7 position-static d-none d-lg-block col-custom">
+                                        <nav class="main-nav d-flex justify-content-center">
+                                            <ul class="nav">
+                                                <li>
+                                                    <a class="active" href="index.html">
+                                                        <span class="menu-text">Trang chủ</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <span class="menu-text">Các sản phẩm</span>
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-submenu dropdown-hover">
+                                                        <li>
+                                                            <a href="shop.html">Cửa hàng nguyên liệu</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="meal-planner.html">Lập kế hoạch ăn uống</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="nutrition.html">Phân tích dinh dưỡng</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="test.html">Công thức nấu ăn</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="blog-details-fullwidth.html">
+                                                        <span class="menu-text"> Blog</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="contact-us.html">
+                                                        <span class="menu-text">Liên hệ</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="partners.html">
+                                                        <span class="menu-text">Đối tác</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="pricing.html">
+                                                        <span class="menu-text">Giá cả</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="col-lg-2 col-xl-3 col-sm-6 col-6 col-custom">
+                                        <div class="header-right-area main-nav">
+                                            <ul class="nav">
+                                                <li class="login-register-wrap d-none d-xl-flex">
+                                                    <span><a href="login.html">Đăng nhập</a></span>
+                                                    <span><a href="register.html">Đăng ký</a></span>
+                                                </li>
+                                                <li class="minicart-wrap">
+                                                    <a href="#" class="minicart-btn toolbar-btn">
+                                                        <i class="ion-bag"></i>
+                                                        <span class="cart-item_count">3</span>
+                                                    </a>
+                                                    <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/cai-bo-xoi.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html">Cải bó xôi</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>2×</span>
+                                                                        <span class="cart-price">60,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/viet-quat.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html" title="Blueberry">Việt quất</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>1×</span>
+                                                                        <span class="cart-price">355,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-cart-item">
+                                                            <div class="cart-img">
+                                                                <a href="cart.html">
+                                                                    <img src="~/assets/images/ingredient/hanh-nhan.jpg"
+                                                                         alt="" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart-text">
+                                                                <h5 class="title">
+                                                                    <a href="cart.html">Hạnh nhân</a>
+                                                                </h5>
+                                                                <div class="cart-text-btn">
+                                                                    <div class="cart-qty">
+                                                                        <span>1×</span>
+                                                                        <span class="cart-price">350,000 VNĐ</span>
+                                                                    </div>
+                                                                    <button type="button">
+                                                                        <i class="ion-trash-b"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cart-links d-flex justify-content-center">
+                                                            <a class="obrien-button white-btn" href="cart.html">
+                                                                Giỏ
+                                                                hàng
+                                                            </a>
+                                                            <a class="obrien-button white-btn"
+                                                               href="checkout.html">Thanh toán</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="mobile-menu-btn d-lg-none">
+                                                    <a class="off-canvas-btn" href="#mobileMenu">
+                                                        <i class="fa fa-bars"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sticky Header End Here -->
+                <!-- off-canvas menu start -->
+                <aside class="off-canvas-wrapper" id="mobileMenu">
+                    <div class="off-canvas-overlay"></div>
+                    <div class="off-canvas-inner-content">
+                        <div class="btn-close-off-canvas">
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <!-- mobile menu start -->
+                        <div class="mobile-navigation">
+                            <!-- mobile menu navigation start -->
+                            <nav>
+                                <ul class="mobile-menu">
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Trang chủ</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a>Các sản phẩm</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop.html">Cửa hàng nguyên liệu</a></li>
+                                            <li>
+                                                <a href="meal-planner.html">Lập kế hoạch ăn uống</a>
+                                            </li>
+                                            <li>
+                                                <a href="nutrition.html">Phân tích dinh dưỡng</a>
+                                            </li>
+                                            <li>
+                                                <a href="recipe.html">Công thức nấu ăn</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="blog-grid-fullwidth.html">Blog</a></li>
+                                    <li><a href="contact-us.html">Liên hệ</a></li>
+                                    <li><a href="partners.html">Đối tác</a></li>
+                                    <li><a href="pricing.html">Giá cả</a></li>
+                                </ul>
+                            </nav>
+                            <!-- mobile menu navigation end -->
+                        </div>
+                        <!-- mobile menu end -->
+                        <div class="header-top-settings offcanvas-curreny-lang-support">
+                            <!-- mobile menu navigation start -->
+                            <nav>
+                                <ul class="mobile-menu">
+                                    <li><a href="login.html">Đăng nhập</a></li>
+                                    <li><a href="Register.html">Đăng ký</a></li>
+                                </ul>
+                            </nav>
+                            <!-- mobile menu navigation end -->
+                        </div>
+                        <!-- offcanvas widget area start -->
+                        <div class="offcanvas-widget-area">
+                            <div class="top-info-wrap text-left text-black">
+                                <ul>
+                                    <li>
+                                        <i class="fa fa-phone"></i>
+                                        <a href="tel:0399092221">0399-092-221</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope"></i>
+                                        <a href="mailto:nduyhieu210@gmail.com">nduyhieu210@gmail.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="off-canvas-widget-social">
+                                <a title="Facebook" href="#"><i class="fa fa-facebook-f"></i></a>
+                                <a title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                <a title="LinkedIn" href="#"><i class="fa fa-linkedin"></i></a>
+                                <a title="YouTube" href="#"><i class="fa fa-youtube"></i></a>
+                                <a title="Vimeo" href="#"><i class="fa fa-vimeo"></i></a>
+                            </div>
+                        </div>
+                        <!-- offcanvas widget area end -->
+                    </div>
+            </div>
+            </aside>
+            <!-- off-canvas menu end -->
+            </header>
+            <!-- Header Area End Here -->
+            <!-- Header Area End Here -->
+            <div class="Tabs Plan__tabs">
+                <ul class="Tabs__head">
+                    <li class="Tab undefined"><a class="Tab__link Tab__active"><span>Ngày 1</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 2</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 3</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 4</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 5</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 6</span></a></li>
+                    <li class="Tab undefined"><a class="Tab__link "><span>Ngày 7</span></a></li>
+                </ul>
+                <div class="Tabs__content">
+                    <a class="Meal"
+                       href="http://www.biggirlssmallkitchen.com/2010/08/recipe-flash-tomato-dinner-roll.html"
+                       target="_blank">
+                        <div class="Meal__head">Bữa tối</div>
+                        <div class="Meal__content">
+                            <div class="Meal__content__img">
+                                <img src="https://edamam-product-images.s3.amazonaws.com/web-img/1c0/1c083fd6f4412a511d7f30e618ae5b5a.jpg?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIBU%2Fmoz4GVfYZ00I6pCkcXyxqyau5ckv6ssiOSvUcbGjAiEAoEmZYxzFXrsbaH8RFKDDrCTVVxeowTkf4nmc4UfY0FoquAUIeBAAGgwxODcwMTcxNTA5ODYiDIlWi9SefYtp%2FoE2cyqVBYiH1WgdvsGgcBjDI5RovUY13XZtH%2BnQ9dsE4sYCKtee4N54d7%2B5uGJ%2BFhvNODYS36eU0fnCJdwYj%2B9u%2FFYFBaTR78S7A8ltMaqGlnMad6qzrBcu7qShnj8XOtaBSQprjROz%2B9I2Oiu0bL0c39pt0N%2F0iDNLpqYqjQpWXzQyXucynA6iVyS%2FozkI27uL%2BcrLMWEmzT0E8y%2BAchtdk1%2BQpISHzyq7PJ2ZfilwthsNY9K9Bo9mnB5t6TFhX6xWL4l7vxbOuuW1Rf8CAfkrawZ7RtnWVfCXCJD8gsNCdp7Ooeyo5iPItsDsbJtn0zRDbRvCOiouS4mNxh8EQ0ShJFdV6NcCm45q8MJ2WGTHHT6MZY2Fd5hJGI39ru%2FceSTajLhmqrsCcxpEjy%2BwexNGSN0aGloryGsASYMJsC6YmS6D77%2B8SMQ6F7VNMWYAoGThUrdyGMaJ10Jxjh3M4NWntSUVXRluCWSC8C1%2FfeTRRttqw8V10xLbzNzNv%2Fi%2Ft5R%2BZzAqeZ41t6K93zqZ4s%2BR4S4mHIqC4l7NrxAQCJ%2B24TDKE%2FPIZo%2FPmb%2Fj%2BX%2FsalF4LfWY3tarI9whvbEPzItBi0WR0icJmzy2gRiMayhG7GotTvcJVcLXeFwOI5CAJn7z64MHuGztXZUZOQHCpWzPb%2FKjI%2F91ly7%2B443WB75exFaCI0GnugxqjVDmGywHm89VFmfHclugJU2ZXmy2KYee0bnGNmZjQvM36apWSjbEyME%2FzSC8PyPALaFhNZTdSga%2FXDbiQpPSHIJ%2Fo%2FNDAWm3duylfpQJKvAguEF1mWnw2viTW5RB2SGu7Fyxbn4wmsyB6%2FZ25JNIxaoOL5EZfIeOUqoDBF8b5vk7thz%2BifggceIB%2Fi6ZT5l%2FrDIw4pTysgY6sQGvAUbymbq8yfO1L47H9Yz5L2y9SDx6x5ksW98jzoJUVDnkjV8JhDJA0MIY0c3wzirfQnG1vHDEnUoldRYSAIk4Hsx%2FTQ2EPdVLPNX8JYIoTexwv58FqzpUDPGuOQ1DQo6tJfw%2BBX0DYdMDlqpGRUxqYDQA%2FIPWBU4hxQwS5VHQbwoCLn%2B5o5%2B%2Fe1hbt4BAGs1gxzJZ1OW2tHE7lFCZuY2SNIT48duZXNu5j4S1ik%2B%2F%2FZI%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20240602T152442Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=3600&amp;X-Amz-Credential=ASIASXCYXIIFIAWJKYQC%2F20240602%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=a60840df67a629a1a7d93958845f3d2f223141ae20726f028f24fb456cf72dbd"
+                                     alt="Unavailable">
+                            </div>
+                            <div class="Meal__content__desc">
+                                <h2 class="Meal__content__desc--heading">Cà chua &amp; Panzanella cuộn</h2>
+                                <h4 class="Meal__content__desc--source">Cookbook.com</h4>
+                            </div>
+                            <div class="Meal__content__labels">
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Cân bằng</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Nhiều chất xơ</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Ăn
+                                        chay
+                                    </span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa trứng</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa lạc</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa hạt cây</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Ăn
+                                        kiêng
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a><a class="Meal"
+                           href="http://www.tastingtable.com/cook/recipes/breakfast-focaccia-bread-bacon-sausage-eggs-sheet-tray-meal"
+                           target="_blank">
+                        <div class="Meal__head">Bữa sáng</div>
+                        <div class="Meal__content">
+                            <div class="Meal__content__img">
+                                <img src="https://edamam-product-images.s3.amazonaws.com/web-img/fa7/fa78d1cd0b98a051db016a42e3a13aac?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIBU%2Fmoz4GVfYZ00I6pCkcXyxqyau5ckv6ssiOSvUcbGjAiEAoEmZYxzFXrsbaH8RFKDDrCTVVxeowTkf4nmc4UfY0FoquAUIeBAAGgwxODcwMTcxNTA5ODYiDIlWi9SefYtp%2FoE2cyqVBYiH1WgdvsGgcBjDI5RovUY13XZtH%2BnQ9dsE4sYCKtee4N54d7%2B5uGJ%2BFhvNODYS36eU0fnCJdwYj%2B9u%2FFYFBaTR78S7A8ltMaqGlnMad6qzrBcu7qShnj8XOtaBSQprjROz%2B9I2Oiu0bL0c39pt0N%2F0iDNLpqYqjQpWXzQyXucynA6iVyS%2FozkI27uL%2BcrLMWEmzT0E8y%2BAchtdk1%2BQpISHzyq7PJ2ZfilwthsNY9K9Bo9mnB5t6TFhX6xWL4l7vxbOuuW1Rf8CAfkrawZ7RtnWVfCXCJD8gsNCdp7Ooeyo5iPItsDsbJtn0zRDbRvCOiouS4mNxh8EQ0ShJFdV6NcCm45q8MJ2WGTHHT6MZY2Fd5hJGI39ru%2FceSTajLhmqrsCcxpEjy%2BwexNGSN0aGloryGsASYMJsC6YmS6D77%2B8SMQ6F7VNMWYAoGThUrdyGMaJ10Jxjh3M4NWntSUVXRluCWSC8C1%2FfeTRRttqw8V10xLbzNzNv%2Fi%2Ft5R%2BZzAqeZ41t6K93zqZ4s%2BR4S4mHIqC4l7NrxAQCJ%2B24TDKE%2FPIZo%2FPmb%2Fj%2BX%2FsalF4LfWY3tarI9whvbEPzItBi0WR0icJmzy2gRiMayhG7GotTvcJVcLXeFwOI5CAJn7z64MHuGztXZUZOQHCpWzPb%2FKjI%2F91ly7%2B443WB75exFaCI0GnugxqjVDmGywHm89VFmfHclugJU2ZXmy2KYee0bnGNmZjQvM36apWSjbEyME%2FzSC8PyPALaFhNZTdSga%2FXDbiQpPSHIJ%2Fo%2FNDAWm3duylfpQJKvAguEF1mWnw2viTW5RB2SGu7Fyxbn4wmsyB6%2FZ25JNIxaoOL5EZfIeOUqoDBF8b5vk7thz%2BifggceIB%2Fi6ZT5l%2FrDIw4pTysgY6sQGvAUbymbq8yfO1L47H9Yz5L2y9SDx6x5ksW98jzoJUVDnkjV8JhDJA0MIY0c3wzirfQnG1vHDEnUoldRYSAIk4Hsx%2FTQ2EPdVLPNX8JYIoTexwv58FqzpUDPGuOQ1DQo6tJfw%2BBX0DYdMDlqpGRUxqYDQA%2FIPWBU4hxQwS5VHQbwoCLn%2B5o5%2B%2Fe1hbt4BAGs1gxzJZ1OW2tHE7lFCZuY2SNIT48duZXNu5j4S1ik%2B%2F%2FZI%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20240602T152442Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=3600&amp;X-Amz-Credential=ASIASXCYXIIFIAWJKYQC%2F20240602%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=2159d7d0f5f00fd009d721b6696b6ebbd4611113d672ff96300a5ff49ee59f38"
+                                     alt="Unavailable">
+                            </div>
+                            <div class="Meal__content__desc">
+                                <h2 class="Meal__content__desc--heading">Bữa sang Focaccia</h2>
+                                <h4 class="Meal__content__desc--source">Cookbook.com</h4>
+                            </div>
+                            <div class="Meal__content__labels">
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Cân bằng</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa lạc</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa lupin</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không có nhuyễn thể</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa cồn</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Ăn
+                                        kiêng pescatarian
+                                    </span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">chế độ ăn Địa Trung Hải</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a><a class="Meal"
+                           href="https://www.self.com/recipe/no-cook-lunch-idea-cheese-crackers-fruit-and-egg"
+                           target="_blank">
+                        <div class="Meal__head">Lunch</div>
+                        <div class="Meal__content">
+                            <div class="Meal__content__img">
+                                <img src="https://edamam-product-images.s3.amazonaws.com/web-img/92b/92be3175c7d048ee5b67ff57684ded8e.jpg?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEO7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIH5J1d4lxYtfhVQgSQx2l6FeuhOGMpZ659E5ZzhzOrXSAiEAzbZuoqtC5EG8LFEumHgKu4A9p%2BfnkTsFLlC4ufaCJRkquQUIdxAAGgwxODcwMTcxNTA5ODYiDNE%2Fx39V%2FYbu3worDyqWBbNAM7cqshoXAt1NquQzxyzCQJF4aovyft8rQOSt9MyOYEKM0Rm8nL5Km8guuhOGEVtseaMwMOEDBDw%2FGmPjDiuDJ%2BZyvyBqdgJlbYZPPjoZFfOBagmlkSk6fIPstvLHJd7%2FvkyNrLB1zLDB985FnqEAQBO0iD75bweQqN%2BAMI98Ed7fvF6xGi6Tq8TH3eD8lRKbjJxUkR%2FmSl2JAILEOH2wtZOgq%2FSPnkpM0yUhGS6k2Qlht0yhuiUE7mNjn%2FfIL%2FsSs1D2eON00tEfNl%2ByWEvgYqQYKOrO1Mcz5U7eUZQH0BI7bbfIgJtu1GVfNSfT9lrhFjM5EX5z1immF98mPmdXd1Lrm5zquQepxNqBfQDcUBFhzlNRw%2Fmr9Sa3MeFmY6zz3U0tp91DZdyfdOF%2Bxw2YEhpmrlgrvhl29Aat0iscUXw3tyK7cBStxenduGRE%2F7V%2BqkjjWuCpQeAOkKsmGzKUAnoIDWMd%2FSU%2BdfNQ%2Fo0XiJoMvA09kCFT4Xn%2Fh9tnmBJ1e%2B4R1X%2BY3G%2F%2BWZgEHk1dQGMx2l6WJBxr7JynV4Cc1EGnlkA8VjHjAP3A9gtmSBkPpg7Hb202Ncn5uYMpKFbp90f0L3VOMOZOgMBv2dp5%2Fz3gnhy%2FwBCpyRqKx8pWo%2FJ%2B9FzE4XSGEIggTwrhTbZW7I%2BJEb9Cg4AVBoEZE%2F1KlgGUh9RcOkvlnY9SyMuocAtJV74E%2BIDNLWLlcJq8mqK%2F72oeHlhNRcGo4L3PvXnpYpq3igeBFb6IXkhG5Vhylnis%2BHZEVsYx%2Bs6biUZbvkUF%2BUJmF9N5OxXPRywz77pKcCu%2FDQKh4D%2BP%2BZUuz1mIm%2BT6F%2FarI%2BysP1cV1pmJHWGrTYqzLz1yH9lkeDOa9vlBiz4UibLpMKTu8bIGOrEBcJ%2Bh9xv%2B2bjkjgwizEFHl36a1Y13Fqv5%2FquHppdnq1mLus4%2BDNGKJH6ivbhQiiuIKnb6VFBddMqxa1hF3DqUhwSlwUs0fxbO%2BajQzY%2BaMzIzzidYIQS3G4XTKelfaqvt7JYwhyblM7oQDA0%2BUuv%2BTL2aitdrVGAYlUMZY8uqZnfNNgUobJZWbTxBTsiglOHbVwWsu8Q1QdHYJ5V%2BzmcWf8t%2BrFeBT5luU%2FZDCcnjMUD2&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20240602T152442Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=3600&amp;X-Amz-Credential=ASIASXCYXIIFMRP46Z7F%2F20240602%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=f75b69e559f539084f43db55aebd395aa12318e2a871847f150214f3239dc492"
+                                     alt="Unavailable">
+                            </div>
+                            <div class="Meal__content__desc">
+                                <h2 class="Meal__content__desc--heading">
+                                    Bữa trưa không nấu: Phô mai, Bánh qui,
+                                    Hoa quả, và Trứng
+                                </h2>
+                                <h4 class="Meal__content__desc--source">Bản thân</h4>
+                            </div>
+                            <div class="Meal__content__labels">
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Cân bằng</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Nhiều chất xơ</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Ăn
+                                        chya
+                                    </span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa mù tạt</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">Không chứa hạt vừng</span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Ăn
+                                        kiêng
+                                    </span>
+                                </div>
+                                <div class="Tag undefined">
+                                    <i class="Tag__icon undefined"></i><span class="Tag__Name">
+                                        Hỗ
+                                        trợ dinh dưỡng
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Area Start Here -->
+        <footer class="footer-area">
+            <div class="footer-widget-area">
+                <div class="container container-default custom-area">
+                    <div class="row">
+                        <!-- First Column -->
+                        <div class="col-12 col-md-4 col-lg-4 col-custom">
+                            <div class="single-footer-widget m-0">
+                                <div class="footer-logo">
+                                    <a href="index.html">
+                                        <img src="~/assets/images/logo/logo.png" alt="Logo Image" />
+                                    </a>
+                                </div>
+                                <p class="desc-content">
+                                    Calofit - Web lên thực đơn bữa ăn dinh dưỡng
+                                </p>
+                                <div class="social-links">
+                                    <ul class="d-flex">
+                                        <li>
+                                            <a class="border rounded-circle" href="#" title="Facebook">
+                                                <i class="fa fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="border rounded-circle" href="#" title="Twitter">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="border rounded-circle" href="#" title="Linkedin">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="border rounded-circle" href="#" title="Youtube">
+                                                <i class="fa fa-youtube"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="border rounded-circle" href="#" title="Vimeo">
+                                                <i class="fa fa-vimeo"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second Column -->
+                        <div class="col-12 col-md-4 col-lg-4 col-custom text-center d-flex align-items-center justify-content-center">
+                            <div class="single-footer-widget">
+                                <h2 class="widget-title">Link</h2>
+                                <ul class="widget-list">
+                                    <li><a href="blog-grid-fullwidth.html">Blog</a></li>
+                                    <li><a href="recipe.html">Công thức nấu ăn</a></li>
+                                    <li><a href="partners.html">Đối tác</a></li>
+                                    <li><a href="pricing.html">Giá cả</a></li>
+                                    <li><a href="meal-planner.html">Lập kế hoạch </a></li>
+                                    <li><a href="contact-us.html">Liên hệ</a></li>
+                                    <li><a href="nutrition.html">Phân tích dinh dưỡng</a></li>
+                                    <li><a href="shop.html">Shop nguyên liệu</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Third Column -->
+                        <div class="col-12 col-md-4 col-lg-4 col-custom d-flex align-items-center justify-content-center">
+                            <div class="single-footer-widget">
+                                <h2 class="widget-title">Thông tin thêm:</h2>
+                                <div class="widget-body">
+                                    <address>
+                                        Đại học FPT Hà Nội, Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện
+                                        Thạch Thất, Hà
+                                        Nội<br />
+                                        Phone: 0399-092-221<br />
+                                        Email: nduyhieu210@gmail.com
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright-area">
+                <div class="container custom-area">
+                    <div class="row">
+                        <div class="col-12 text-center col-custom">
+                            <div class="copyright-content">
+                                <p>
+                                    Copyright © 2024 | Built by&nbsp;<strong>CaloFit</strong>&nbsp;
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Footer Area End Here -->
+
+    </div>
+    </div>
+    <!-- Scroll to Top Start -->
+    <a class="scroll-to-top" href="#">
+        <i class="ion-chevron-up"></i>
+    </a>
+    <!-- Scroll to Top End -->
+    <!-- JS
+    ============================================ -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Migrate JS -->
+    <script src="~/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- Modernizer JS -->
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- Slick Slider JS -->
+    <script src="~/assets/js/plugins/slick.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="~/assets/js/plugins/jquery.countdown.min.js"></script>
+    <!-- Ajax JS -->
+    <script src="~/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Nice Select JS -->
+    <script src="~/assets/js/plugins/jquery.nice-select.min.js"></script>
+    <!-- Jquery Ui JS -->
+    <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
+    <!-- jquery magnific popup js -->
+    <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+</body>
+
+</html>

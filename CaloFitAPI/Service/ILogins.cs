@@ -2,6 +2,7 @@
 {
     public interface ILogins
     {
-     public bool Login(string username, string password);
+        int GetUserId(string username);
+        public bool Login(string username, string password);
     }
 }

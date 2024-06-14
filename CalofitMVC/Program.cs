@@ -6,8 +6,18 @@ namespace CalofitMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Configure services
             builder.Services.AddControllersWithViews();
+
+            // Add session
+            builder.Services.AddSession(options =>
+            {
+                // Set a short timeout for testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -15,7 +25,7 @@ namespace CalofitMVC
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // The default HSTS value is 30 days.
                 app.UseHsts();
             }
 
@@ -26,6 +36,9 @@ namespace CalofitMVC
 
             app.UseAuthorization();
 
+            // Use session
+            app.UseSession();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -33,4 +46,5 @@ namespace CalofitMVC
             app.Run();
         }
     }
+    
 }

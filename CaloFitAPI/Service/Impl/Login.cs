@@ -11,11 +11,21 @@ namespace CaloFitAPI.Service.Impl
             _context = context;
         }
 
+        public int GetUserId(string username)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == username);
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            return user.UserId;
+        }
+
         bool ILogins.Login(string username, string password)
         {
 
                 // Check if a user with the provided username exists in the database
-                var user = _context.Users.FirstOrDefault(u => u.Username == username);
+                var user = _context.Users.FirstOrDefault(u => u.Email == username);
 
                 if (user == null)
                 {

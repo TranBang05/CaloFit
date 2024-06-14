@@ -4,6 +4,6 @@ namespace CaloFitAPI.Repository
 {
     public interface IDietRepository
     {
-        Diet getDietById(int dietId);
+        List<Recipe> getRecipe();
     }
 }

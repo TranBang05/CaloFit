@@ -15,17 +15,18 @@ namespace CaloFitAPI.Service.Impl
             _mapper = mapper;
         }
 
-        public DietResponse GetDietWithMenus(int dietId)
+    
+
+        public List<RecipeResponse> GetRecipe()
         {
-            var dietEntity = _repository.getDietById(dietId);
+            var dietEntity = _repository.getRecipe();
             if (dietEntity == null)
             {
                 return null;
             }
 
-            var dietDTO = _mapper.Map<DietResponse>(dietEntity);
-
-            return dietDTO;
+            var recipeDTOs = _mapper.Map<List<RecipeResponse>>(dietEntity);
+            return recipeDTOs;
         }
     }
 }
