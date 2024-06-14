@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CaloFitAPI.Dto.Request;
 using CaloFitAPI.Dto.Response;
 using CaloFitAPI.Models;
 
@@ -14,23 +13,10 @@ namespace CaloFitAPI.Dto.Mapper
             CreateMap<Recipe, RecipeResponse>();
             CreateMap<Step, StepResponse>();
             CreateMap<RecipeIngredient, RecipeIngredientResponse>();
-
-
             CreateMap<IngredientServingSize, IngredientServingSizeResponse>();
-
-
             CreateMap<Ingredient, IngredientResponse>()
                  .ForMember(dest => dest.ServingSizes, opt => opt.MapFrom(src => src.IngredientServingSizes));
-
-
-
             CreateMap<Nutrition, NutritionReponse>();
-
-            CreateMap<OrderDetailRequest, OrderDetail>();
-            CreateMap<OrderRequest, Order>()
-                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetailRequests));
-
-            CreateMap<CartRequest, Cart>();
         }
     }
 }
