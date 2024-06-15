@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa;
 using Rotativa.AspNetCore;
+using Rotativa.AspNetCore.Options;
 using static System.Net.WebRequestMethods;
 
 namespace CalofitMVC.Controllers
@@ -78,7 +79,13 @@ namespace CalofitMVC.Controllers
         public ActionResult ShopList(int userId)
         {
             List<Cart> carts = getAll(userId);
-            return new ViewAsPdf("shoplist", carts) { FileName = "Test.pdf" };
+            return new ViewAsPdf("shoplist", carts) {
+                FileName = "ShoppingList.pdf",
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Portrait,
+                PageMargins = new Margins(0, 0, 0, 0),
+                CustomSwitches = "--print-media-type"
+            };
         }
         public IActionResult ShoppingList(int userId)
         {
