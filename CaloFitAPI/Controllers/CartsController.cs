@@ -35,7 +35,7 @@ namespace CaloFitAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(await _context.Carts.Include(x => x.Order).ThenInclude(x => x.OrderDetails).ThenInclude(x => x.Product).Where(x => x.Userid == userId).ToListAsync());
+            return Ok(await _context.Carts.Include(x => x.Product).ThenInclude(p => p.Ingredient).Include(x => x.User).Where(x => x.Userid == userId).ToListAsync());
         }
 
         // GET: api/Carts/5
@@ -59,37 +59,37 @@ namespace CaloFitAPI.Controllers
 
         // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(int id, Cart cart)
-        {
-            if (id != cart.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutCart(int id, Cart cart)
+        //{
+        //    if (id != cart.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(cart).State = EntityState.Modified;
+        //    _context.Entry(cart).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CartExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CartExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/Carts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //POST: api/Carts
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Cart>> PostCart(CartRequest request)
         {
@@ -97,7 +97,6 @@ namespace CaloFitAPI.Controllers
             {
                 return Problem("Entity set 'CalofitDBContext.Carts'  is null.");
             }
-            request.Id = 0;
             Cart cart = _mapper.Map<Cart>(request);
             _context.Carts.Add(cart);
             await _context.SaveChangesAsync();
@@ -105,15 +104,28 @@ namespace CaloFitAPI.Controllers
             return Created("GetCart", cart);
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<Cart>> PostCart(Cart request)
+        //{
+        //    if (_context.Carts == null)
+        //    {
+        //        return Problem("Entity set 'CalofitDBContext.Carts'  is null.");
+        //    }
+        //    _context.Carts.Add(request);
+        //    await _context.SaveChangesAsync();
+
+        //    return Created("GetCart", request);
+        //}
+
         // DELETE: api/Carts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCart(int id)
+        [HttpDelete("{productId:int}/{userId:int}")]
+        public async Task<IActionResult> DeleteCart(int productId, int userId)
         {
             if (_context.Carts == null)
             {
                 return NotFound();
             }
-            var cart = await _context.Carts.FindAsync(id);
+            var cart = await _context.Carts.FirstOrDefaultAsync(x => x.Productid == productId && x.Userid == userId);
             if (cart == null)
             {
                 return NotFound();
@@ -125,9 +137,9 @@ namespace CaloFitAPI.Controllers
             return NoContent();
         }
 
-        private bool CartExists(int id)
-        {
-            return (_context.Carts?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        //private bool CartExists(int id)
+        //{
+        //    return (_context.Carts?.Any(e => e.Id == id)).GetValueOrDefault();
+        //}
     }
 }

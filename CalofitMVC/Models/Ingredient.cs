@@ -8,7 +8,6 @@ namespace CalofitMVC.Models
         public Ingredient()
         {
             IngredientServingSizes = new HashSet<IngredientServingSize>();
-            OrderDetails = new HashSet<OrderDetail>();
             RecipeIngredients = new HashSet<RecipeIngredient>();
         }
 
@@ -18,8 +17,8 @@ namespace CalofitMVC.Models
 
         public virtual Image Image { get; set; } = null!;
         public virtual Nutrition? Nutrition { get; set; }
+        public virtual Product? Product { get; set; }
         public virtual ICollection<IngredientServingSize> IngredientServingSizes { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
     }
 }

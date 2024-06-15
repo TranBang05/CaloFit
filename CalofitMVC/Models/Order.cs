@@ -7,7 +7,6 @@ namespace CalofitMVC.Models
     {
         public Order()
         {
-            Carts = new HashSet<Cart>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -16,7 +15,6 @@ namespace CalofitMVC.Models
         public int Userid { get; set; }
 
         public virtual User User { get; set; } = null!;
-        public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace CaloFitAPI.Models
         public virtual DbSet<Nutrition> Nutritions { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Recipe> Recipes { get; set; } = null!;
         public virtual DbSet<RecipeAllergy> RecipeAllergies { get; set; } = null!;
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
@@ -40,10 +41,11 @@ namespace CaloFitAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=DESKTOP-7DM08OD\\SQLEXPRESS;database=CalofitDB;user=sa;password=123456;TrustServerCertificate=true");
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("LoadDb"));
             }
         }
 
@@ -72,19 +74,22 @@ namespace CaloFitAPI.Models
 
             modelBuilder.Entity<Cart>(entity =>
             {
+                entity.HasKey(e => new { e.Userid, e.Productid })
+                    .HasName("PK_Cart_1");
+
                 entity.ToTable("Cart");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Orderid).HasColumnName("orderid");
 
                 entity.Property(e => e.Userid).HasColumnName("userid");
 
-                entity.HasOne(d => d.Order)
+                entity.Property(e => e.Productid).HasColumnName("productid");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.Carts)
-                    .HasForeignKey(d => d.Orderid)
+                    .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cart_Order");
+                    .HasConstraintName("FK_Cart_Ingredients");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
@@ -323,8 +328,6 @@ namespace CaloFitAPI.Models
 
                 entity.Property(e => e.Orderid).HasColumnName("orderid");
 
-                entity.Property(e => e.Price).HasColumnName("price");
-
                 entity.Property(e => e.ProductId).HasColumnName("productId");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
@@ -340,6 +343,25 @@ namespace CaloFitAPI.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_Ingredients");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.HasKey(e => e.IngredientId);
+
+                entity.ToTable("Product");
+
+                entity.Property(e => e.IngredientId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ingredient_id");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.HasOne(d => d.Ingredient)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.IngredientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Product_Ingredients");
             });
 
             modelBuilder.Entity<Recipe>(entity =>

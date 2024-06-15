@@ -125,6 +125,19 @@
 	/*----------------------------------------*/
 	$(document).ready(function () {
 		$('.nice-select').niceSelect();
+<<<<<<< HEAD
+=======
+		var totalSum = 0;
+
+		// Iterate over each span with class 'sum'
+		$('.sum').each(function () {
+			var sumText = $(this).text().trim();
+			var sumValue = parseFloat(sumText); // Convert text to number
+			totalSum += sumValue;
+		});
+
+		$('#total').text(totalSum.toFixed(2));
+>>>>>>> master
 	});
 	/*----------------------------------------*/
 	/* Toggle Function Active
@@ -196,6 +209,22 @@
 			}
 		}
 		$button.parent().find('input').val(newVal);
+<<<<<<< HEAD
+=======
+		var any = $button.closest('tr').find('#price').text();
+		var price = parseFloat($button.closest('tr').find('#price').text());
+		$button.closest('tr').find('.sum').text(price * newVal);
+
+		var totalSum = 0;
+		$('.sum').each(function () {
+			// Get the text content of the span, convert to number and add to totalSum
+			var sumText = $(this).text().trim();
+			var sumValue = parseFloat(sumText); // Convert text to number
+			totalSum += sumValue;
+		});
+		$('#total').text(totalSum.toFixed(2));
+
+>>>>>>> master
 	});
 	/*----------------------------------------*/
 	/*  Countdown
