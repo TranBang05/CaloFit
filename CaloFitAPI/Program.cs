@@ -1,75 +1,71 @@
-using CaloFitAPI.Dto.Mapper;
+﻿using CaloFitAPI.Dto.Mapper;
 using CaloFitAPI.Models;
 using CaloFitAPI.Repository;
 using CaloFitAPI.Repository.Impl;
 using CaloFitAPI.Service;
 using CaloFitAPI.Service.Impl;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Cấu hình dịch vụ và middleware
 
-builder.Services.AddControllers().AddOData(opt => opt
-    .Select()
-    .Expand()
-    .Filter()
-    .OrderBy()
-    .SetMaxTop(100)
-    ).AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddControllersWithViews().AddOData(opt => opt
+	.Select()
+	.Expand()
+	.Filter()
+	.OrderBy()
+	.SetMaxTop(100)
+	).AddNewtonsoftJson(options =>
+	options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+builder.Services.AddDbContext<CalofitDBContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
 
-
-builder.Services.AddDbContext<CalofitDBContext>(
-              options => options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CalofitDBContext>();
 builder.Services.AddScoped<ILogins, Login>();
 builder.Services.AddScoped<ISignup, SignUp>();
-builder.Services.AddScoped<IAllegic,AllegicSevices>();
+builder.Services.AddScoped<IAllegic, AllegicSevices>();
 builder.Services.AddScoped<Iusermanagement, userManagement>();
-
 builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
-
 builder.Services.AddScoped<ICreateMeal, CreateMeal>();
 builder.Services.AddScoped<Iforgotpass, ForgotPass>();
 //builder.Services.AddScoped<ITest, Test>();
 builder.Services.AddScoped<IDietRepository, DietRepository>();
 builder.Services.AddScoped<IDietService, DietService>();
 builder.Services.AddAutoMapper(typeof(MyMapper).Assembly);
+
 builder.Services.AddHttpContextAccessor();
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-// Register session services
+builder.Services.AddODataQueryFilter();
 builder.Services.AddSession(options =>
 {
-    // Set a short timeout for easy testing.
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    // Make the session cookie essential
-    options.Cookie.IsEssential = true;
+	options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true; // Make the session cookie essential
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Cấu hình middleware và dịch vụ trong ứng dụng
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseSession();
+app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapControllers();

@@ -24,24 +24,23 @@ namespace CaloFitAPI.Service.Impl
         bool ILogins.Login(string username, string password)
         {
 
-                // Check if a user with the provided username exists in the database
+  
                 var user = _context.Users.FirstOrDefault(u => u.Email == username);
 
                 if (user == null)
                 {
-                    // Username not found
                     return false;
                 }
 
-                // Check if the provided password matches the user's password
+
                 if (user.Password == password)
                 {
-                    // Passwords match, login successful
+
                     return true;
                 }
                 else
                 {
-                    // Passwords do not match
+
                     return false;
                 }
             }

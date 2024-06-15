@@ -1,4 +1,4 @@
-﻿
+﻿@model List<CalofitMVC.Resp.RecipeRsp>
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -498,16 +498,42 @@
 					<!-- Shop Wrapper Start -->
 					<div class="row shop_wrapper grid_list">
 
+						<div class="col-12 col-custom product-area">
+							@foreach (var meal in Model)
+							{
+								<div class="meal-plan">
+									<div class="recipe-list">
+										<div class="recipe-item">
+											@if (meal.ImageId.HasValue)
+											{
+												<img src="@meal.ImageId" alt="@meal.RecipeName">
+											}
+											<h3>@meal.RecipeName</h3>
+											<p>Servings: @meal.Servings</p>
+											<p>Cook Time: @meal.CookTime minutes</p>
+											<p>Prep Time: @meal.PrepTime minutes</p>
+											<p>Description: @meal.Description</p>
 
-
-
-
-
-
-
-
-
-
+											<div class="recipe-steps">
+												<h4>Steps:</h4>
+												<ul>
+													@foreach (var step in meal.Steps)
+													{
+														<li>Step @step.Description</li>
+													}
+												</ul>
+											</div>
+											<div class="recipe-ingredients">
+												<h4>Ingredients:</h4>
+												<ul>
+													
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							}
+						</div>
 
 						<div class="col-12 col-custom product-area">
 							<div class="single-product position-relative">

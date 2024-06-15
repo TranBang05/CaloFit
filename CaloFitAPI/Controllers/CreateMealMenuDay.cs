@@ -8,7 +8,7 @@ namespace CaloFitAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CreateMealMenuDay : Controller
+    public class CreateMealMenuDay : ControllerBase
     {
 
         public readonly CalofitDBContext _context;
@@ -21,11 +21,12 @@ namespace CaloFitAPI.Controllers
              
         }
         [HttpPost]
-        public IActionResult CreateMeal(CreateRecipesRequest request, [FromServices] IHttpContextAccessor httpContextAccessor)
+        public IActionResult CreateMeal(CreateRecipesRequest request)
         {
+
             try
             {
-                var session = httpContextAccessor.HttpContext.Session;
+           
                 var result = _createMeal.getMealDay(request);
                 return Ok(result);
             }

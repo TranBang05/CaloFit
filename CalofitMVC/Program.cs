@@ -1,3 +1,5 @@
+using Microsoft.Win32;
+
 namespace CalofitMVC
 {
     public class Program
@@ -8,7 +10,7 @@ namespace CalofitMVC
 
             // Configure services
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddHttpContextAccessor();
             // Add session
             builder.Services.AddSession(options =>
             {
@@ -18,6 +20,8 @@ namespace CalofitMVC
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
+       
+
 
             var app = builder.Build();
 
@@ -29,15 +33,17 @@ namespace CalofitMVC
                 app.UseHsts();
             }
 
+
+
+            app.UseSession();
+            app.UseAuthorization();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+       
 
-            // Use session
-            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

@@ -2,50 +2,65 @@
 using Flurl.Http;
 using System.Threading.Tasks;
 using Flurl;
+using Newtonsoft.Json.Linq;
 
 namespace CalofitMVC.Controllers
 {
-    public class LoginController : Controller
-    {
-        private readonly string loginApiUrl = "http://localhost:5150/api/Login";
+	public class LoginController : Controller
+	{
+		private readonly string loginApiUrl = "http://localhost:5150/api/Login";
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public async Task<IActionResult> Index(string email, string password)
-        {
-            try
-            {
-        
-                var response = await loginApiUrl
-                    .SetQueryParam("username", email)
-                    .SetQueryParam("password", password)
-                    .PostAsync(null) 
-                    .ReceiveString();
+		[HttpPost]
+		public async Task<IActionResult> Index(string email, string password)
+		{
+			try
+			{
+				var response = await loginApiUrl
+					.SetQueryParam("username", email)
+					.SetQueryParam("password", password)
+					.PostAsync();
 
-                if (response == "sucess")
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.ErrorMessage = "Đăng nhập không thành công. Vui lòng kiểm tra lại email và mật khẩu.";
-                    return View();
-                }
-            }
-            catch (FlurlHttpException ex)
-            {
-                ViewBag.ErrorMessage = $"Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại sau. {ex.Message}";
-                return View();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.ErrorMessage = $"Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau. {ex.Message}";
-                return View();
-            }
-        }
-    }
+
+				if (response.StatusCode==200)
+				{
+					var responseContent = await response.ResponseMessage.Content.ReadAsStringAsync();
+					var jsonResponse = JObject.Parse(responseContent);
+					int user = jsonResponse.Value<int>("userId");
+
+			       	HttpContext.Session.SetInt32("user", user);
+
+
+					if (HttpContext.Session.GetInt32("user") != null)
+					{
+				        return	RedirectToAction("Index", "Home");
+					}
+					else
+					{
+						return View();
+
+					}
+				}
+				else
+				{
+
+					return View();
+				}
+			}
+			catch (FlurlHttpException ex)
+			{
+
+				return View();
+			}
+			catch (Exception ex)
+			{
+
+				return View();
+			}
+		}
+	}
 }

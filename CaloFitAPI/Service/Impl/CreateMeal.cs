@@ -14,8 +14,12 @@ namespace CaloFitAPI.Service.Impl
         private readonly IHttpContextAccessor _httpContextAccessor;
         private List<CreateMealPlan> createMealPlans;
 
-        public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
+
+
+
+		public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
         {
+
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -23,11 +27,19 @@ namespace CaloFitAPI.Service.Impl
         public List<CreateMealPlan> getMealDay(CreateRecipesRequest request)
         {
 
-            var session = _httpContextAccessor.HttpContext.Session;
-            var userId = session.GetInt32("UserId");
-            if (request.dailyorweek == "daily")
+			var httpContext = _httpContextAccessor.HttpContext;
+
+			if (httpContext == null)
+			{
+				throw new InvalidOperationException("HttpContext is null.");
+			}
+
+			var session = httpContext.Session;
+            //var userId = session.GetInt32("user");
+            var userId = 1;
+
+			if (request.dailyorweek == "daily")
             {
-                // Retrieve meal plans from the database
                 var mealPlans = _context.MealPlans
                     .Include(mp => mp.Meals)
                         .ThenInclude(m => m.MealRecipes)
@@ -50,6 +62,7 @@ namespace CaloFitAPI.Service.Impl
                     .ToList();
 
 
+                
                 var newMealPlan = new MealPlan
                 {
                     UserId = (int)userId,
