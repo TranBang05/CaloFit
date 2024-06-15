@@ -1921,11 +1921,7 @@ a.editCardButton:hover {
 
 /* ======== Demo Search ======== */
 body {
-<<<<<<< HEAD
   background-image: url(/~/assets/images/banner/header.png);
-=======
-  background-image: url(/assets/images/banner/header.png);
->>>>>>> master
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;

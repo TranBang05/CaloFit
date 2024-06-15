@@ -125,8 +125,6 @@
 	/*----------------------------------------*/
 	$(document).ready(function () {
 		$('.nice-select').niceSelect();
-<<<<<<< HEAD
-=======
 		var totalSum = 0;
 
 		// Iterate over each span with class 'sum'
@@ -137,7 +135,6 @@
 		});
 
 		$('#total').text(totalSum.toFixed(2));
->>>>>>> master
 	});
 	/*----------------------------------------*/
 	/* Toggle Function Active
@@ -209,8 +206,6 @@
 			}
 		}
 		$button.parent().find('input').val(newVal);
-<<<<<<< HEAD
-=======
 		var any = $button.closest('tr').find('#price').text();
 		var price = parseFloat($button.closest('tr').find('#price').text());
 		$button.closest('tr').find('.sum').text(price * newVal);
@@ -224,7 +219,6 @@
 		});
 		$('#total').text(totalSum.toFixed(2));
 
->>>>>>> master
 	});
 	/*----------------------------------------*/
 	/*  Countdown
