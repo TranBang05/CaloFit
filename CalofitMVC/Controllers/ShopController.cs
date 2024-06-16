@@ -8,9 +8,9 @@ namespace CalofitMVC.Controllers
     public class ShopController : Controller
     {
         // GET: ShopController
+        CalofitDBContext db = new CalofitDBContext();
         public ActionResult Index()
         {
-            CalofitDBContext db = new CalofitDBContext();
             ViewData["list"] = db.Products.Include(x => x.Ingredient).ToList();
             return View("shop");
         }
@@ -18,21 +18,27 @@ namespace CalofitMVC.Controllers
         // GET: ShopController/Details/5
         public ActionResult Details(int id)
         {
-            return View("shop");
+            Product p = db.Products.Include(x => x.Ingredient).ThenInclude(x => x.Nutrition).FirstOrDefault(x => x.IngredientId ==  id);
+            return View("details", p);
         }
 
         // GET: ShopController/Create
         public ActionResult Create()
         {
 
-            return RedirectToAction("Create","Cart","");
+            return RedirectToAction("Create", "Cart", "");
         }
         public ActionResult Cart(int id)
         {
             CalofitDBContext db = new CalofitDBContext();
-            Product p = db.Products.Include(x => x.Ingredient).FirstOrDefault(x => x.IngredientId == id);
-            
-            return RedirectToAction("Create", "Cart", new {id = id});
+            int userId = HttpContext.Session.GetInt32("user") ?? 1;
+            Cart p = db.Carts.FirstOrDefault(x => x.Productid == id && x.Userid == userId);
+            if(p != null)
+            {
+                TempData["mess"] = "Đã có trong giỏ hàng";
+            }
+
+            return RedirectToAction("Create", "Cart", new { id = id });
         }
 
         // POST: ShopController/Create
