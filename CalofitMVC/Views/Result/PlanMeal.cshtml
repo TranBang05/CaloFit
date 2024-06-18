@@ -1,4 +1,5 @@
 ﻿@model MealPlan
+
     <!-- Header Area End Here -->
     <main>
         <div class="background-meal position-relative">
@@ -49,7 +50,7 @@
                                             <div class="card-header" id="heading2" style="display: block;">
                                                 <h2><b>Step 2:</b> Bộ lọc chọn cho mỗi bữa:</h2>
                                                 <h5 class="mb-0">
-                                                    <button class="btn btn-link active">Dị ứng</button>
+                                                    <button class="btn btn-link">Dị ứng</button>
                                                 </h5>
                                             </div>
                                             <div class="card-header" id="heading3" style="display: block;">
@@ -2727,14 +2728,14 @@
                                             </div>
                                             <div class="all-meals">
                                                 <h2>Cho tất cả bữa</h2>
-                                                <span class="right-filter caloriesValue" data-nutrient="calories"
+                                                @*<span class="right-filter caloriesValue" data-nutrient="calories"
                                                       data-min="1000" data-max="2000"
                                                       data-range="1000-2000">
                                                     1000-2000kcal<span class="close_control"></span>
                                                 </span><span class="right-filter nutrientsValue" data-nutrient="PROCNT"
                                                              data-min="10" data-max="" data-range="10+">
                                                     Protein - 10+g<span class="close_control"></span>
-                                                </span>
+                                                </span>*@
                                             </div>
                                             <div class="breakfast">
                                                 <h2>Hàng ngày</h2>
@@ -2892,3 +2893,101 @@
 
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const heading1 = document.getElementById('heading1');
+        const heading2 = document.getElementById('heading2');
+        const heading3 = document.getElementById('heading3');
+        const heading4 = document.getElementById('heading4');
+        const heading5 = document.getElementById('heading5');
+        const heading6 = document.getElementById('heading6');
+        const heading7 = document.getElementById('heading7');
+        const heading8 = document.getElementById('heading8');
+
+        const collapse1 = document.getElementById('collapse1');
+        const collapse2 = document.getElementById('collapse2');
+        const collapse3 = document.getElementById('collapse3');
+        const collapse4 = document.getElementById('collapse4');
+        const collapse5 = document.getElementById('collapse5');
+        const collapse6 = document.getElementById('collapse6');
+        const collapse7 = document.getElementById('collapse7');
+        const collapse8 = document.getElementById('collapse8');
+
+        const headings = [
+            heading1, heading2, heading3, heading4, heading5, heading6, heading7, heading8
+        ];
+
+        const buttons = document.querySelectorAll('.btn-link');
+
+        let activeButton = null;
+
+        buttons.forEach((button, index) => {
+            button.addEventListener("click", function () {
+                if (activeButton !== this) {
+                    if (activeButton) {
+                        activeButton.classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    activeButton = this;
+                }
+            });
+        });
+
+        let activeHeading = null;
+
+        headings.forEach((heading, index) => {
+            heading.addEventListener("click", function () {
+                if (activeHeading !== this) {
+                    if (activeHeading) {
+                        activeHeading.classList.remove('active');
+                        document.getElementById(`collapse${headings.indexOf(activeHeading) + 1}`).style.display = 'none';
+                    }
+                    this.classList.add('active');
+                    activeHeading = this;
+                    document.getElementById(`collapse${index + 1}`).style.display = 'block';
+                }
+            });
+        });
+
+        function hideAllCollapse() {
+            collapse1.style.display = 'none';
+            collapse2.style.display = 'none';
+            collapse3.style.display = 'none';
+            collapse4.style.display = 'none';
+            collapse5.style.display = 'none';
+            collapse6.style.display = 'none';
+            collapse7.style.display = 'none';
+            collapse8.style.display = 'none';
+        }
+
+        resFoods.forEach(item => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (!this.classList.contains("active")) {
+                    removeActiveClass(resRecipes);
+                    this.classList.add('active');
+                    foodsArea.style.display = 'inline-table';
+                    recipesArea.style.display = 'none';
+                }
+            });
+        });
+
+        resRecipes.forEach(item => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (!this.classList.contains("active")) {
+                    removeActiveClass(resFoods);
+                    this.classList.add('active');
+                    recipesArea.style.display = 'inline-table';
+                    foodsArea.style.display = 'none';
+                }
+            });
+        });
+
+        function removeActiveClass(elements) {
+            elements.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
+</script>
