@@ -2,7 +2,7 @@
 <!-- Header Area End Here -->
 <div class="Tabs Plan__tabs">
     <ul class="Tabs__head">
-        <li class="Tab undefined"><a class="Tab__link Tab__active"><span>Ngày 1</span></a></li>
+        <li class="Tab undefined"><a class="Tab__link "><span>Ngày 1</span></a></li>
         <li class="Tab undefined"><a class="Tab__link "><span>Ngày 2</span></a></li>
         <li class="Tab undefined"><a class="Tab__link "><span>Ngày 3</span></a></li>
         <li class="Tab undefined"><a class="Tab__link "><span>Ngày 4</span></a></li>
@@ -15,7 +15,6 @@
             @foreach (var meal in ViewData["list"] as List<Meal>)
             {
                 <div class="meal-plan">
-
                     <div class="recipe-list">
                         <div class="recipe-item">
                             <img src="@meal.MealRecipes.Image.ImageFilename" alt="@meal.MealRecipesId">
@@ -161,3 +160,15 @@
 
 <!-- Main JS -->
 <script src="~/assets/js/main.js"></script>
+
+<script>
+    const tabLinks = document.querySelectorAll('.Tab__link');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            tabLinks.forEach(l => l.classList.remove('Tab__active'));
+
+            link.classList.add('Tab__active');
+        });
+    });
+</script>
