@@ -35,7 +35,7 @@ namespace CaloFitAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(await _context.Carts.Include(x => x.Product).ThenInclude(p => p.Ingredient).Include(x => x.User).Where(x => x.Userid == userId).ToListAsync());
+            return Ok(await _context.Carts.Include(x => x.Product).ThenInclude(p => p.Ingredient).ThenInclude(x => x.Image).Include(x => x.User).Where(x => x.Userid == userId).ToListAsync());
         }
 
         // GET: api/Carts/5

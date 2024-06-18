@@ -1,3 +1,4 @@
+using CalofitMVC.Models;
 using Microsoft.Win32;
 
 using Rotativa.AspNetCore;
@@ -22,7 +23,7 @@ namespace CalofitMVC
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-       
+            builder.Services.AddDbContext<CalofitDBContext>();
 
 
             // Add services to the container.
@@ -50,7 +51,7 @@ namespace CalofitMVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Result}/{action=Index}/{id?}");
 
             app.Run();
         }
