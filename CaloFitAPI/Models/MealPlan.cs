@@ -7,7 +7,7 @@ namespace CaloFitAPI.Models
     {
         public MealPlan()
         {
-            Meals = new HashSet<Meal>();
+            MealPlanManyToManies = new HashSet<MealPlanManyToMany>();
         }
 
         public int PlanId { get; set; }
@@ -17,6 +17,6 @@ namespace CaloFitAPI.Models
         public string PlanType { get; set; } = null!;
 
         public virtual User User { get; set; } = null!;
-        public virtual ICollection<Meal> Meals { get; set; }
+        public virtual ICollection<MealPlanManyToMany> MealPlanManyToManies { get; set; }
     }
 }

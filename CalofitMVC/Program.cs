@@ -51,7 +51,7 @@ namespace CalofitMVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Result}/{action=Index}/{id?}");
+                pattern: "{controller=Result}/{action=PlanMeal}/{id?}");
 
             app.Run();
         }
