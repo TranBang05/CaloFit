@@ -1,20 +1,56 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CalofitMVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CalofitMVC.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Obrien - Organic Food HTML5 Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico">
+
+    <!-- CSS
+    ============================================ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="~/assets/css/vendor/font.awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/assets/css/vendor/ionicons.min.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/slick.min.css">
+    <!-- Animation -->
+    <link rel="stylesheet" href="~/assets/css/plugins/animate.min.css">
+    <!-- jQuery Ui -->
+    <link rel="stylesheet" href="~/assets/css/plugins/jquery-ui.min.css">
+    <!-- Nice Select -->
+    <link rel="stylesheet" href="~/assets/css/plugins/nice-select.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/assets/css/plugins/magnific-popup.css">
+
+    <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from the above) -->
+    <!-- <link rel="stylesheet" href="~/assets/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/plugins.min.css"> -->
+    <!-- Main Style CSS (Please use minify version for better website load performance) -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="~/assets/css/style.min.css"> -->
 </head>
+
 <body>
-    <header>
-        <div class="home-wrapper home-1">
+
+    <div class="contact-wrapper">
+        <header class="main-header-area">
             <!-- Main Header Area Start -->
             <div class="main-header">
-                <div class="row">
                 <div class="container container-default custom-area">
+                    <div class="row">
                         <div class="col-lg-12 col-custom">
                             <div class="row align-items-center">
                                 <div class="col-lg-2 col-xl-2 col-sm-6 col-6 col-custom">
@@ -28,7 +64,7 @@
                                     <nav class="main-nav d-flex justify-content-center">
                                         <ul class="nav">
                                             <li>
-                                                <a class="active" href="/Home/Home">
+                                                <a class="active" href="index.html">
                                                     <span class="menu-text">Trang chủ</span>
                                                 </a>
                                             </li>
@@ -39,37 +75,36 @@
                                                 </a>
                                                 <ul class="dropdown-submenu dropdown-hover">
                                                     <li>
-                                                        <a href="/Shop">Cửa hàng nguyên liệu</a>
+                                                        <a href="shop.html">Cửa hàng nguyên liệu</a>
                                                     </li>
                                                     <li>
-                                                        <a href="~/Home/MealPlan">Lập kế hoạch ăn uống</a>
+                                                        <a href="meal-planner.html">Lập kế hoạch ăn uống</a>
                                                     </li>
-
-                                              @*       <li>
+                                                    <li>
                                                         <a href="nutrition.html">Phân tích dinh dưỡng</a>
-                                                    </li> *@
+                                                    </li>
                                                     <li>
-                                                        <a href="/Home/Recipe">Công thức nấu ăn</a>
+                                                        <a href="recipe.html">Công thức nấu ăn</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="/Blog/Blog">
+                                                <a href="blog-grid-fullwidth.html">
                                                     <span class="menu-text"> Blog</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/Contact/Contact">
+                                                <a href="contact-us.html">
                                                     <span class="menu-text">Liên hệ</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/Partners/Partners">
+                                                <a href="partners.html">
                                                     <span class="menu-text">Đối tác</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/Price/Price">
+                                                <a href="pricing.html">
                                                     <span class="menu-text">Giá cả</span>
                                                 </a>
                                             </li>
@@ -80,8 +115,8 @@
                                     <div class="header-right-area main-nav">
                                         <ul class="nav">
                                             <li class="login-register-wrap d-none d-xl-flex">
-                                                <span><a href="/MyAccount/MyAccount">Tài Khoản</a></span>
-                                                
+                                                <span><a href="login.html">Đăng nhập</a></span>
+                                                <span><a href="register.html">Đăng ký</a></span>
                                             </li>
                                             <li class="minicart-wrap">
                                                 <a href="#" class="minicart-btn toolbar-btn">
@@ -91,16 +126,19 @@
                                                 <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/cai-bo-xoi.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/1.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html">Cải bó xôi</a>
+                                                                <a href="cart.html">11. Product with video - navy</a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
-                                                                    <span>2×</span>
-                                                                    <span class="cart-price">60,000 VNĐ</span>
+                                                                    <span>1×</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -110,16 +148,24 @@
                                                     </div>
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/viet-quat.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/2.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html" title="Blueberry">Việt quất</a>
+                                                                <a href="cart.html"
+                                                                   title="10. This is the large title for testing large title and there is an image for testing - white">
+                                                                    10.
+                                                                    This is the large title for
+                                                                    testing...
+                                                                </a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
                                                                     <span>1×</span>
-                                                                    <span class="cart-price">355,000 VNĐ</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -129,16 +175,22 @@
                                                     </div>
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/hanh-nhan.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/3.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html">Hạnh nhân</a>
+                                                                <a href="cart.html">
+                                                                    1. New and sale badge product - s /
+                                                                    red
+                                                                </a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
                                                                     <span>1×</span>
-                                                                    <span class="cart-price">350,000 VNĐ</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -147,8 +199,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="cart-links d-flex justify-content-center">
-                                                        <a class="obrien-button white-btn" href="cart.html">Giỏ hàng</a>
-                                                        <a class="obrien-button white-btn" href="checkout.html">Thanh toán</a>
+                                                        <a class="obrien-button white-btn" href="cart.html">
+                                                            View
+                                                            cart
+                                                        </a>
+                                                        <a class="obrien-button white-btn"
+                                                           href="checkout.html">Checkout</a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -234,8 +290,8 @@
                                     <div class="header-right-area main-nav">
                                         <ul class="nav">
                                             <li class="login-register-wrap d-none d-xl-flex">
-                                                <span><a href="/MyAccount/MyAccount">MyAccount</a></span>
-                                         
+                                                <span><a href="login.html">Đăng nhập</a></span>
+                                                <span><a href="register.html">Đăng ký</a></span>
                                             </li>
                                             <li class="minicart-wrap">
                                                 <a href="#" class="minicart-btn toolbar-btn">
@@ -245,16 +301,19 @@
                                                 <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/cai-bo-xoi.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/1.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html">Cải bó xôi</a>
+                                                                <a href="cart.html">11. Product with video - navy</a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
-                                                                    <span>2×</span>
-                                                                    <span class="cart-price">60,000 VNĐ</span>
+                                                                    <span>1×</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -264,16 +323,24 @@
                                                     </div>
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/viet-quat.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/2.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html" title="Blueberry">Việt quất</a>
+                                                                <a href="cart.html"
+                                                                   title="10. This is the large title for testing large title and there is an image for testing - white">
+                                                                    10.
+                                                                    This is the large title for
+                                                                    testing...
+                                                                </a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
                                                                     <span>1×</span>
-                                                                    <span class="cart-price">355,000 VNĐ</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -283,16 +350,22 @@
                                                     </div>
                                                     <div class="single-cart-item">
                                                         <div class="cart-img">
-                                                            <a href="cart.html"><img src="~/assets/images/ingredient/hanh-nhan.jpg" alt="" /></a>
+                                                            <a href="cart.html">
+                                                                <img src="~/assets/images/cart/3.jpg"
+                                                                     alt="" />
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <h5 class="title">
-                                                                <a href="cart.html">Hạnh nhân</a>
+                                                                <a href="cart.html">
+                                                                    1. New and sale badge product - s /
+                                                                    red
+                                                                </a>
                                                             </h5>
                                                             <div class="cart-text-btn">
                                                                 <div class="cart-qty">
                                                                     <span>1×</span>
-                                                                    <span class="cart-price">350,000 VNĐ</span>
+                                                                    <span class="cart-price">$98.00</span>
                                                                 </div>
                                                                 <button type="button">
                                                                     <i class="ion-trash-b"></i>
@@ -301,8 +374,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="cart-links d-flex justify-content-center">
-                                                        <a class="obrien-button white-btn" href="cart.html">Giỏ hàng</a>
-                                                        <a class="obrien-button white-btn" href="checkout.html">Thanh toán</a>
+                                                        <a class="obrien-button white-btn" href="cart.html">
+                                                            View
+                                                            cart
+                                                        </a>
+                                                        <a class="obrien-button white-btn"
+                                                           href="checkout.html">Checkout</a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -319,8 +396,8 @@
                     </div>
                 </div>
             </div>
-
-
+            <!-- Sticky Header End Here -->
+            <!-- off-canvas menu start -->
             <aside class="off-canvas-wrapper" id="mobileMenu">
                 <div class="off-canvas-overlay"></div>
                 <div class="off-canvas-inner-content">
@@ -338,7 +415,7 @@
                                 <li class="menu-item-has-children">
                                     <a>Các sản phẩm</a>
                                     <ul class="dropdown">
-                                        <li><a href="/shop">Cửa hàng nguyên liệu</a></li>
+                                        <li><a href="shop.html">Cửa hàng nguyên liệu</a></li>
                                         <li>
                                             <a href="meal-planner.html">Lập kế hoạch ăn uống</a>
                                         </li>
@@ -346,7 +423,7 @@
                                             <a href="nutrition.html">Phân tích dinh dưỡng</a>
                                         </li>
                                         <li>
-                                            <a href="">Công thức nấu ăn</a>
+                                            <a href="recipe.html">Công thức nấu ăn</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -394,14 +471,62 @@
                     </div>
                     <!-- offcanvas widget area end -->
                 </div>
-        </div>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
     </div>
+    </aside>
+    <!-- off-canvas menu end -->
+    </header>
+    <!-- Header Area End Here -->
+    <!-- Login Area Start Here -->
+    <div class="login-register-area mt-no-text mb-no-text">
+        <div class="container container-default-2 custom-area">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                    <div class="login-register-wrapper">
+                        <div class="section-content text-center mb-5">
+                            <h2 class="title-4 mb-2">Tạo tài khoản</h2>
+                            <p class="desc-content">
+                                Vui lòng đăng ký bằng cách nhập thông tin chi tiết của tài khoản
+                                dưới đây.
+                            </p>
+                        </div>
+                        <form action="/Resgister" method="post">
+                          
+                            
+                            <div class="single-input-item mb-3">
+                                <input type="email" name="email" placeholder="Email">
+                            </div>
+                            <div class="single-input-item mb-3">
+                                <input type="password" name ="password"placeholder="Nhập mật khẩu">
+                            </div>
 
+                            <div class="single-input-item mb-3">
+                                <input type="repass" name ="repass"placeholder="Xác thực">
+                            </div>
+                            <div class="single-input-item mb-3">
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                            <label class="custom-control-label" for="rememberMe">
+                                                Nhận thông tin mới nhất
+                                                của chúng tôi
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-input-item mb-3">
+                                <button class="btn obrien-button-2 primary-color">Đăng ký</button>
+                            </div>
+                        </form>
+\
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Area End Here -->
+    <!-- Footer Area Start Here -->
     <footer class="footer-area">
         <div class="footer-widget-area">
             <div class="container container-default custom-area">
@@ -470,8 +595,8 @@
                             <h2 class="widget-title">Thông tin thêm:</h2>
                             <div class="widget-body">
                                 <address>
-                                    Đại học FPT Hà Nội, Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện
-                                    Thạch Thất, Hà
+                                    Đại học FPT Hà Nội, Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện Thạch
+                                    Thất, Hà
                                     Nội<br />
                                     Phone: 0399-092-221<br />
                                     Email: nduyhieu210@gmail.com
@@ -496,10 +621,35 @@
             </div>
         </div>
     </footer>
+    <!-- Footer Area End Here -->
+    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- JS
+    ============================================ -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Migrate JS -->
+    <script src="~/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- Modernizer JS -->
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- Slick Slider JS -->
+    <script src="~/assets/js/plugins/slick.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="~/assets/js/plugins/jquery.countdown.min.js"></script>
+    <!-- Ajax JS -->
+    <script src="~/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Nice Select JS -->
+    <script src="~/assets/js/plugins/jquery.nice-select.min.js"></script>
+    <!-- Jquery Ui JS -->
+    <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
+    <!-- jquery magnific popup js -->
+    <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
 </body>
+
 </html>

@@ -13,29 +13,30 @@ namespace CaloFitAPI.Service.Impl
         {
             _context = context;
         }
-        public bool RegisterUser(RegisterRequest request)
+        public bool RegisterUser(string email, string password, string repass)
         {
-
-            if (_context.Users.Any(u => u.Username == request.Username || u.Email == request.RePassword))
+            string randomUsername;
+            randomUsername = "user" + Guid.NewGuid().ToString("N");
+            if (_context.Users.Any(u => u.Username == email || u.Email == repass))
             {
-                return false; 
+                return false;
             }
 
 
             var newUser = new User
             {
-                Username = request.Username,
-                Password = request.Password,
-                Email = request.RePassword,
-                Role = "user", 
-                RegistrationDate = DateTime.UtcNow 
+                Username = randomUsername,
+                Password = password,
+                Email = email,
+                Role = "user",
+                RegistrationDate = DateTime.UtcNow
             };
 
-   
+
             _context.Users.Add(newUser);
             _context.SaveChanges();
 
-            return true; 
+            return true;
         }
     }
 }

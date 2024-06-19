@@ -5,15 +5,15 @@ using CaloFitAPI.Models;
 
 namespace CaloFitAPI.Dto.Mapper
 {
-    public class MyMapper:Profile
+    public class MyMapper : Profile
     {
         public MyMapper()
         {
             CreateMap<Diet, DietResponse>();
             CreateMap<Menu, MenuResponse>();
             CreateMap<Recipe, RecipeResponse>()
-                .ForMember(dest => dest.ImageId, opt => opt.MapFrom(src => src.Image.ImageFilename));
-			CreateMap<Step, StepResponse>();
+                .ForMember(dest => dest.ImageName, opt => opt.MapFrom(src => src.Image!.ImageFilename));
+            CreateMap<Step, StepResponse>();
             CreateMap<RecipeIngredient, RecipeIngredientResponse>();
 
 
@@ -22,8 +22,6 @@ namespace CaloFitAPI.Dto.Mapper
 
             CreateMap<Ingredient, IngredientResponse>()
                  .ForMember(dest => dest.ServingSizes, opt => opt.MapFrom(src => src.IngredientServingSizes));
-
-
 
             CreateMap<Nutrition, NutritionReponse>();
 

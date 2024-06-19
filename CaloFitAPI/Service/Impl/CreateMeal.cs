@@ -17,7 +17,7 @@ namespace CaloFitAPI.Service.Impl
 
 
 
-		public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
+        public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
         {
 
             _context = context;
@@ -27,18 +27,18 @@ namespace CaloFitAPI.Service.Impl
         public List<CreateMealPlan> getMealDay(CreateRecipesRequest request)
         {
 
-			var httpContext = _httpContextAccessor.HttpContext;
+            var httpContext = _httpContextAccessor.HttpContext;
 
-			if (httpContext == null)
-			{
-				throw new InvalidOperationException("HttpContext is null.");
-			}
+            if (httpContext == null)
+            {
+                throw new InvalidOperationException("HttpContext is null.");
+            }
 
-			var session = httpContext.Session;
+            var session = httpContext.Session;
             //var userId = session.GetInt32("user");
             var userId = 1;
 
-			if (request.dailyorweek == "daily")
+            if (request.dailyorweek == "daily")
             {
                 var mealPlans = _context.MealPlans
                     .Include(mp => mp.Meals)
@@ -61,8 +61,6 @@ namespace CaloFitAPI.Service.Impl
                     .Where(mp => mp.PlanType == request.dailyorweek)
                     .ToList();
 
-
-                
                 var newMealPlan = new MealPlan
                 {
                     UserId = (int)userId,
@@ -78,7 +76,7 @@ namespace CaloFitAPI.Service.Impl
                 _context.SaveChanges();
 
 
-                 createMealPlans = mealPlans.Select(mp => new CreateMealPlan
+                createMealPlans = mealPlans.Select(mp => new CreateMealPlan
                 {
                     PlanId = newMealPlan.PlanId,
                     CreateMeals = mp.Meals.Select(m => new CreateRecipeMeal
@@ -93,7 +91,7 @@ namespace CaloFitAPI.Service.Impl
                             CookTime = m.MealRecipes.CookTime,
                             PrepTime = m.MealRecipes.PrepTime,
                             Description = m.MealRecipes.Description,
-                            ImageId = m.MealRecipes.ImageId,
+
                             MenuId = m.MealRecipes.MenuId,
                             userPreferences = m.MealRecipes.UserPreferences
                                 .Select(up => new UserPreferencesDto
@@ -156,7 +154,7 @@ namespace CaloFitAPI.Service.Impl
 
                             _context.Meals.Add(meal);
 
-                            mealTypeIndex++; 
+                            mealTypeIndex++;
                         }
 
                         _context.SaveChanges();
@@ -166,6 +164,16 @@ namespace CaloFitAPI.Service.Impl
                 return createMealPlans;
 
             }
+
+
+
+
+
+
+
+
+
+
             else
             {
 
@@ -226,7 +234,7 @@ namespace CaloFitAPI.Service.Impl
                                 CookTime = m.MealRecipes.CookTime,
                                 PrepTime = m.MealRecipes.PrepTime,
                                 Description = m.MealRecipes.Description,
-                                ImageId = m.MealRecipes.ImageId,
+                                //ImageId = m.MealRecipes.ImageId,
                                 MenuId = m.MealRecipes.MenuId,
                                 userPreferences = m.MealRecipes.UserPreferences
                                     .Select(up => new UserPreferencesDto
@@ -287,7 +295,7 @@ namespace CaloFitAPI.Service.Impl
 
                                 _context.Meals.Add(meal);
 
-                                mealTypeIndex++; 
+                                mealTypeIndex++;
                             }
 
                             _context.SaveChanges();
@@ -304,18 +312,18 @@ namespace CaloFitAPI.Service.Impl
         }
         public string GetMealType(int index)
         {
-      
+
             switch (index % 3)
             {
                 case 0:
-                    return "Sáng"; 
+                    return "Sáng";
                 case 1:
-                    return "Trưa"; 
+                    return "Trưa";
                 case 2:
-                    return "Tối";  
+                    return "Tối";
                 default:
                     throw new Exception("Unexpected index.");
             }
         }
     }
- }
+}

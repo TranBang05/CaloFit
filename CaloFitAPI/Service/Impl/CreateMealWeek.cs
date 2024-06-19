@@ -54,7 +54,7 @@ namespace CaloFitAPI.Service.Impl
                             CookTime = m.MealRecipes.CookTime,
                             PrepTime = m.MealRecipes.PrepTime,
                             Description = m.MealRecipes.Description,
-                            ImageId = m.MealRecipes.ImageId,
+
                             MenuId = m.MealRecipes.MenuId,
                             userPreferences = m.MealRecipes.UserPreferences
                     .Select(up => new UserPreferencesDto

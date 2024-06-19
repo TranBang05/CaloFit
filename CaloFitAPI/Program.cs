@@ -18,16 +18,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Cấu hình dịch vụ và middleware
 
 builder.Services.AddControllersWithViews().AddOData(opt => opt
-	.Select()
-	.Expand()
-	.Filter()
-	.OrderBy()
-	.SetMaxTop(100)
-	).AddNewtonsoftJson(options =>
-	options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+    .Select()
+    .Expand()
+    .Filter()
+    .OrderBy()
+    .SetMaxTop(100)
+    ).AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddDbContext<CalofitDBContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDb")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDB")));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -48,9 +48,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddODataQueryFilter();
 builder.Services.AddSession(options =>
 {
-	options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout
-	options.Cookie.HttpOnly = true;
-	options.Cookie.IsEssential = true; // Make the session cookie essential
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true; // Make the session cookie essential
 });
 
 var app = builder.Build();
@@ -59,12 +59,18 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseSession();
 app.UseRouting();
+
+
+app.MapControllerRoute(
+name: "default",
+pattern: "{controller=Login}/{action=Index}");
+
 
 app.UseAuthorization();
 
