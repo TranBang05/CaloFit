@@ -8,7 +8,7 @@ namespace CalofitMVC.Controllers
 {
 	public class LoginController : Controller
 	{
-		private readonly string loginApiUrl = "http://localhost:5150/api/Login";
+		private readonly string loginApiUrl = "https://calofitweb.azurewebsites.net/api/Login";
 
 		public IActionResult Index()
 		{

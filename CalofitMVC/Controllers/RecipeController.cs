@@ -10,7 +10,7 @@ namespace CalofitMVC.Controllers
     public class RecipeController : Controller
     {
 
-        public string link = "http://localhost:5150/api/Diet/recipe";
+        public string link = "https://calofitweb.azurewebsites.net/api/Diet/recipe";
         private NewtonsoftJsonSerializer serializer;
         public RecipeController()
         {

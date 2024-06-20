@@ -12,11 +12,11 @@ namespace CalofitMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public string linkrecipe = "http://localhost:5150/api/Diet/recipe";
-        public string link = "http://localhost:5150/api/Carts/User";
-        public string linkdiet = "http://localhost:5150/api/Diet";
-        public string linkall = "http://localhost:5150/api/Alllergic";
-        public string createrecipe = "http://localhost:5150/api/CreateMealMenuDay";
+        public string linkrecipe = "https://calofitweb.azurewebsites.net/api/Diet/recipe";
+        public string link = "https://calofitweb.azurewebsites.net/api/Carts/User";
+        public string linkdiet = "https://calofitweb.azurewebsites.net/api/Diet";
+        public string linkall = "https://calofitweb.azurewebsites.net/api/Alllergic";
+        public string createrecipe = "https://calofitweb.azurewebsites.net/api/CreateMealMenuDay";
 
 
         private NewtonsoftJsonSerializer serializer;

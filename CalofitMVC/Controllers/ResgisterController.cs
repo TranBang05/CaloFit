@@ -11,7 +11,7 @@ namespace CalofitMVC.Controllers
         {
             return View();
         }
-        private readonly string registerApiUrl = "http://localhost:5150/api/Register";
+        private readonly string registerApiUrl = "https://calofitweb.azurewebsites.net/api/Register";
 
 
         [HttpPost]

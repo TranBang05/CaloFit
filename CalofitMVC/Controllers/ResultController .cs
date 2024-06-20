@@ -16,7 +16,7 @@ namespace CalofitMVC.Controllers
     {
 
 
-        public string baseUrl = "http://localhost:5150/api/CreateMealMenuDay";
+        public string baseUrl = "https://calofitweb.azurewebsites.net/api/CreateMealMenuDay";
 
         private NewtonsoftJsonSerializer serializer;
         CalofitDBContext context;

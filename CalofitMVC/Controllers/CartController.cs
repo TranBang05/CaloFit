@@ -14,7 +14,7 @@ namespace CalofitMVC.Controllers
 {
     public class CartController : Controller
     {
-        public string link = "http://localhost:5150/api/Carts";
+        public string link = "https://calofitweb.azurewebsites.net/api/Carts";
         private NewtonsoftJsonSerializer serializer;
         public CartController()
         {

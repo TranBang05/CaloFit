@@ -11,7 +11,7 @@ namespace CalofitMVC.Controllers
     public class ForGetController : Controller
     {
 
-        private readonly string lApiUrl = "http://localhost:5150/api/ForgotPass";
+        private readonly string lApiUrl = "https://calofitweb.azurewebsites.net/api/ForgotPass";
 
         public IActionResult ForGet()
         {
