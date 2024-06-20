@@ -11,14 +11,16 @@ namespace CalofitMVC.Controllers
         CalofitDBContext db = new CalofitDBContext();
         public ActionResult Index()
         {
-            ViewData["list"] = db.Products.Include(x => x.Ingredient).ToList();
+            ViewData["list"] = db.Products.Include(x => x.Ingredient).ThenInclude(i => i.Image).ToList();
             return View("shop");
         }
 
         // GET: ShopController/Details/5
         public ActionResult Details(int id)
         {
-            Product p = db.Products.Include(x => x.Ingredient).ThenInclude(x => x.Nutrition).FirstOrDefault(x => x.IngredientId ==  id);
+            Product p = db.Products.Include(x => x.Ingredient).ThenInclude(x => x.Nutrition)
+                .Include(x => x.Ingredient).ThenInclude(x => x.Image)
+                .FirstOrDefault(x => x.IngredientId ==  id);
             return View("details", p);
         }
 

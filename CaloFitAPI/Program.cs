@@ -37,7 +37,7 @@ builder.Services.AddScoped<ISignup, SignUp>();
 builder.Services.AddScoped<IAllegic, AllegicSevices>();
 builder.Services.AddScoped<Iusermanagement, userManagement>();
 builder.Services.AddScoped<INutritionalAnalysis, NutritionalAnalysis>();
-builder.Services.AddScoped<ICreateMeal, CreateMeal>();
+//builder.Services.AddScoped<ICreateMeal, CreateMeal>();
 builder.Services.AddScoped<Iforgotpass, ForgotPass>();
 //builder.Services.AddScoped<ITest, Test>();
 builder.Services.AddScoped<IDietRepository, DietRepository>();

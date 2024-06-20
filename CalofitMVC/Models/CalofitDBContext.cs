@@ -25,6 +25,7 @@ namespace CalofitMVC.Models
         public virtual DbSet<IngredientServingSize> IngredientServingSizes { get; set; } = null!;
         public virtual DbSet<Meal> Meals { get; set; } = null!;
         public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
+        public virtual DbSet<MealPlanManyToMany> MealPlanManyToManies { get; set; } = null!;
         public virtual DbSet<Menu> Menus { get; set; } = null!;
         public virtual DbSet<Nutrition> Nutritions { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -41,18 +42,15 @@ namespace CalofitMVC.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             if (!optionsBuilder.IsConfigured)
             {
-                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(config.GetConnectionString("LoadDb"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=DESKTOP-7DM08OD\\SQLEXPRESS;database=CalofitDB;user=sa;password=123456;TrustServerCertificate=true;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("Latin1_General_100_CI_AS_SC_UTF8");
-
             modelBuilder.Entity<Allergy>(entity =>
             {
                 entity.ToTable("Allergy");
@@ -69,7 +67,7 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.Allergies)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Allergy__user_id__534D60F1");
+                    .HasConstraintName("FK__Allergy__user_id__6477ECF3");
             });
 
             modelBuilder.Entity<Cart>(entity =>
@@ -117,13 +115,13 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comments__recipe__6EF57B66");
+                    .HasConstraintName("FK__Comments__recipe__6754599E");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comments__user_i__6FE99F9F");
+                    .HasConstraintName("FK__Comments__user_i__68487DD7");
             });
 
             modelBuilder.Entity<Diet>(entity =>
@@ -160,13 +158,13 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.Ingredients)
                     .HasForeignKey(d => d.ImageId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ingredien__image__5CD6CB2B");
+                    .HasConstraintName("FK__Ingredien__image__6A30C649");
             });
 
             modelBuilder.Entity<IngredientServingSize>(entity =>
             {
                 entity.HasKey(e => e.ServingSizeId)
-                    .HasName("PK__Ingredie__0A1ADB4F8957E588");
+                    .HasName("PK__Ingredie__0A1ADB4FBE0AE972");
 
                 entity.ToTable("Ingredient_Serving_Sizes");
 
@@ -192,7 +190,7 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.IngredientServingSizes)
                     .HasForeignKey(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ingredien__ingre__5FB337D6");
+                    .HasConstraintName("FK__Ingredien__ingre__693CA210");
             });
 
             modelBuilder.Entity<Meal>(entity =>
@@ -211,25 +209,17 @@ namespace CalofitMVC.Models
                     .HasMaxLength(50)
                     .HasColumnName("meal_type");
 
-                entity.Property(e => e.PlanId).HasColumnName("plan_id");
-
                 entity.HasOne(d => d.MealRecipes)
                     .WithMany(p => p.Meals)
                     .HasForeignKey(d => d.MealRecipesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Meal__meal_recip__5070F446");
-
-                entity.HasOne(d => d.Plan)
-                    .WithMany(p => p.Meals)
-                    .HasForeignKey(d => d.PlanId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Meal__plan_id__4F7CD00D");
+                    .HasConstraintName("FK__Meal__meal_recip__6B24EA82");
             });
 
             modelBuilder.Entity<MealPlan>(entity =>
             {
                 entity.HasKey(e => e.PlanId)
-                    .HasName("PK__MealPlan__BE9F8F1D61D50892");
+                    .HasName("PK__MealPlan__BE9F8F1DAD87D50B");
 
                 entity.ToTable("MealPlan");
 
@@ -253,7 +243,34 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.MealPlans)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__MealPlan__user_i__4CA06362");
+                    .HasConstraintName("FK__MealPlan__user_i__6D0D32F4");
+            });
+
+            modelBuilder.Entity<MealPlanManyToMany>(entity =>
+            {
+                entity.ToTable("MealPlanManyToMany");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Day)
+                    .HasColumnType("datetime")
+                    .HasColumnName("day");
+
+                entity.Property(e => e.MealId).HasColumnName("meal_id");
+
+                entity.Property(e => e.PlanId).HasColumnName("plan_id");
+
+                entity.HasOne(d => d.Meal)
+                    .WithMany(p => p.MealPlanManyToManies)
+                    .HasForeignKey(d => d.MealId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MealPlanManyToMany_Meal");
+
+                entity.HasOne(d => d.Plan)
+                    .WithMany(p => p.MealPlanManyToManies)
+                    .HasForeignKey(d => d.PlanId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MealPlanManyToMany_MealPlan");
             });
 
             modelBuilder.Entity<Menu>(entity =>
@@ -272,13 +289,13 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.Menus)
                     .HasForeignKey(d => d.DietId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Menu__diet_id__403A8C7D");
+                    .HasConstraintName("FK__Menu__diet_id__6E01572D");
             });
 
             modelBuilder.Entity<Nutrition>(entity =>
             {
                 entity.HasKey(e => e.IngredientId)
-                    .HasName("PK__Nutritio__B0E453CFD758EF2C");
+                    .HasName("PK__Nutritio__B0E453CF6F80572D");
 
                 entity.Property(e => e.IngredientId)
                     .ValueGeneratedNever()
@@ -298,7 +315,7 @@ namespace CalofitMVC.Models
                     .WithOne(p => p.Nutrition)
                     .HasForeignKey<Nutrition>(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Nutrition__ingre__628FA481");
+                    .HasConstraintName("FK__Nutrition__ingre__6EF57B66");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -387,13 +404,13 @@ namespace CalofitMVC.Models
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.Recipes)
                     .HasForeignKey(d => d.ImageId)
-                    .HasConstraintName("FK__Recipes__image_i__4316F928");
+                    .HasConstraintName("FK__Recipes__image_i__7A672E12");
 
                 entity.HasOne(d => d.Menu)
                     .WithMany(p => p.Recipes)
                     .HasForeignKey(d => d.MenuId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipes__menu_id__440B1D61");
+                    .HasConstraintName("FK__Recipes__menu_id__7B5B524B");
             });
 
             modelBuilder.Entity<RecipeAllergy>(entity =>
@@ -410,13 +427,13 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.RecipeAllergies)
                     .HasForeignKey(d => d.AllergyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Al__aller__571DF1D5");
+                    .HasConstraintName("FK__Recipe_Al__aller__73BA3083");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeAllergies)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Al__recip__5629CD9C");
+                    .HasConstraintName("FK__Recipe_Al__recip__74AE54BC");
             });
 
             modelBuilder.Entity<RecipeIngredient>(entity =>
@@ -435,25 +452,25 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__ingre__66603565");
+                    .HasConstraintName("FK__Recipe_In__ingre__75A278F5");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__recip__656C112C");
+                    .HasConstraintName("FK__Recipe_In__recip__76969D2E");
 
                 entity.HasOne(d => d.ServingSize)
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.ServingSizeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_In__servi__6754599E");
+                    .HasConstraintName("FK__Recipe_In__servi__778AC167");
             });
 
             modelBuilder.Entity<RecipeRating>(entity =>
             {
                 entity.HasKey(e => e.RatingId)
-                    .HasName("PK__Recipe_R__D35B278B75373A8B");
+                    .HasName("PK__Recipe_R__D35B278B39E3926F");
 
                 entity.ToTable("Recipe_Ratings");
 
@@ -474,13 +491,13 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.RecipeRatings)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Ra__recip__74AE54BC");
+                    .HasConstraintName("FK__Recipe_Ra__recip__787EE5A0");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.RecipeRatings)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe_Ra__user___75A278F5");
+                    .HasConstraintName("FK__Recipe_Ra__user___797309D9");
             });
 
             modelBuilder.Entity<Step>(entity =>
@@ -500,21 +517,21 @@ namespace CalofitMVC.Models
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.ImageId)
-                    .HasConstraintName("FK__Step__image_id__6B24EA82");
+                    .HasConstraintName("FK__Step__image_id__7C4F7684");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Steps)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Step__recipe_id__6A30C649");
+                    .HasConstraintName("FK__Step__recipe_id__7D439ABD");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Users__AB6E61646800B2CC")
+                entity.HasIndex(e => e.Email, "UQ__Users__AB6E61649B950C0C")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Username, "UQ__Users__F3DBC57203525822")
+                entity.HasIndex(e => e.Username, "UQ__Users__F3DBC572E3C5BD8B")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -565,7 +582,7 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.UserGoals)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_Goal__user___59FA5E80");
+                    .HasConstraintName("FK__User_Goal__user___7E37BEF6");
             });
 
             modelBuilder.Entity<UserPreference>(entity =>
@@ -584,18 +601,18 @@ namespace CalofitMVC.Models
                     .WithMany(p => p.UserPreferences)
                     .HasForeignKey(d => d.DietId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_Pref__diet___47DBAE45");
+                    .HasConstraintName("FK__User_Pref__diet___7F2BE32F");
 
                 entity.HasOne(d => d.FavoriteRecipes)
                     .WithMany(p => p.UserPreferences)
                     .HasForeignKey(d => d.FavoriteRecipesId)
-                    .HasConstraintName("FK__User_Pref__favor__48CFD27E");
+                    .HasConstraintName("FK__User_Pref__favor__00200768");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserPreferences)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_Pref__user___46E78A0C");
+                    .HasConstraintName("FK__User_Pref__user___01142BA1");
             });
 
             OnModelCreatingPartial(modelBuilder);

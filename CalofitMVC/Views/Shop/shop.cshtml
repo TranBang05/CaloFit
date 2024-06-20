@@ -100,9 +100,9 @@
                                 <div class="single-product position-relative">
                                     <div class="product-image">
                                         <a class="d-block" asp-action="Details" asp-route-id="@p.IngredientId">
-                                            <img src="assets/images/product/1.jpg" alt="" class="product-image-1 w-100">
-                                            <img src="assets/images/product/2.jpg" alt=""
-                                                 class="product-image-2 position-absolute w-100">
+                                            <img src="@p.Ingredient.Image.ImageFilename" alt="" class="product-image-1 w-100">
+                                            @* <img src="assets/images/product/2.jpg" alt=""
+                                                 class="product-image-2 position-absolute w-100"> *@
                                         </a>
                                     </div>
                                     <div class="product-content">

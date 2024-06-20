@@ -1,0 +1,447 @@
+﻿@model MealPlan
+<form method="post" asp-action="PlanMeal" id="form">
+    <!-- Header Area End Here -->
+    <main>
+        <div class="background-meal position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="breadcrumb-content position-relative section-content">
+                            <h3 class="title">Lập kế hoạch ăn uống</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container api demo-search col-xxl-8">
+            <div class="py-5">
+
+                <div class="row">
+                    <div class="col-md-12 demo-block">
+                        <div class="col-md-12">
+                            <div class="row">
+
+                                <div class="col-md-12 loading-area">
+                                    <div class="loader"></div>
+                                </div>
+
+                                <div class="col-md-12 noresult-area">
+                                    <h2>
+                                        Ooops, nothing in our database matches what you are searching for. Please try
+                                        again
+                                    </h2>
+                                    <a type="button" class="btn btn-primary search-back">
+                                        Change Search
+                                        Parameters
+                                    </a>
+                                </div>
+
+                                <div class="col-md-12 content-area">
+
+                                    <div class="row begin-area">
+                                        <div class="col-md-3 left-col">
+                                            <div class="card-header" id="heading1">
+                                                <h2><b>Bước 1:</b> Chọn số bữa mỗi ngày:</h2>
+                                                <h5 class="mb-0">
+                                                    <a class="btn btn-link">Các bữa mỗi ngày</a>
+                                                </h5>
+                                            </div>
+                                            <div class="card-header" id="heading2" style="display: block;">
+                                                <h2><b>Step 2:</b> Bộ lọc chọn cho mỗi bữa:</h2>
+                                                @* <h5 class="mb-0">
+                                                    <a class="btn btn-link">Dị ứng</a>
+                                                </h5> *@
+                                            </div>
+                                            <div class="card-header" id="heading3" style="display: block;">
+                                                <h5 class="mb-0">
+                                                    <a class="btn btn-link">Chế độ ăn</a>
+                                                </h5>
+                                            </div>
+                                            <div class="card-header" id="heading4" style="display: block;">
+                                                <h5 class="mb-0">
+                                                    <a class="btn btn-link">Calo</a>
+                                                </h5>
+                                            </div>
+@*                                             <div class="card-header" id="heading5" style="display: block;">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link">Dinh dưỡng</button>
+                                                </h5>
+                                            </div> *@
+                                            <div class="card-header" id="heading6" style="display: block;">
+                                                <h2><b>Bước 3:</b> Lập bữa ăn trong:</h2>
+                                                <h5 class="mb-0">
+                                                    <input type="radio" value="daily" name="plantype" class="btn btn-link" checked>Hàng ngày</input>
+                                                </h5>
+                                            </div>
+                                            <div class="card-header" id="heading7" style="display: block;">
+                                                <h5 class="mb-0">
+                                                    <input type="radio" value="weekly" name="plantype" class="btn btn-link">Hàng tuần</input>
+                                                </h5>
+                                            </div>
+                                            <div class="search-btn-line next-step">
+                                                <a class="btn btn-primary step-1 d-none">Next step</a>
+                                                <a class="btn btn-primary step-2 d-none">Next step</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 center-col">
+
+                                            <div id="collapse1" style="display: none;">
+                                                <div class="card-body">
+                                                    <h2>Bữa mỗi ngày</h2>
+                                                    <div class="desc row">
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input"
+                                                                       value="Breakfast" name="bf">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Bữa sáng</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Breakfast"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input" value="Lunch" name="lunch">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Bữa trưa</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Lunch"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input" value="Dinner">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Bữa tối</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Dinner"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapse3" style="display: none;">
+                                                <div class="card-body">
+                                                    <h2>Diets</h2>
+                                                    <div class="desc row">
+                                                    @foreach(Diet diet in ViewData["diet"] as List<Diet>)
+                                                    {
+                                                        <div class="col-md-4 health-check">
+                                                            <label class="checkbox-button">
+                                                                <input type="radio"
+                                                                       class="healt checkbox-button__input"
+                                                                       value="@diet.Id" name="diet">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">@diet.DietName</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="No alcohol used or contained"></span>
+                                                            </label>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="collapse4" style="display: none;">
+                                                <div class="card-body">
+                                                    <h2>Daily Budget</h2>
+                                                    <div class="desc cal">
+                                                        Default value is selected base on min 1600 and
+                                                        max 2000 calorie diet. Please enter your preferred min/max
+                                                        values.
+                                                    </div>
+                                                    <!--input type="text" class="search cal"/> kcal -->
+                                                    <div class="mdesc-cal">
+                                                        <div class="range-slider">
+                                                            <span class="mdescs">
+                                                                min <input type="text" value="1000"
+                                                                           class="search nut min"> max <input type="text"
+                                                                                                              value="2000" class="search nut max"> kcal
+                                                            </span>
+                                                        </div>
+                                                        <div class="range-check cal-check check-contain">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="nutrient-check checkbox-button__input"
+                                                                       value="calories" data-measure="kcal">
+                                                                <span class="checkbox-button__control"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 right-col bgr-row">
+                                            <div class="meals">
+                                                <h2>Số bữa mỗi ngày</h2>
+                                            </div>
+                                            <div class="all-meals">
+                                                <h2>Cho tất cả bữa</h2>
+                                                @*<span class="right-filter caloriesValue" data-nutrient="calories"
+                                                      data-min="1000" data-max="2000"
+                                                      data-range="1000-2000">
+                                                    1000-2000kcal<span class="close_control"></span>
+                                                </span><span class="right-filter nutrientsValue" data-nutrient="PROCNT"
+                                                             data-min="10" data-max="" data-range="10+">
+                                                    Protein - 10+g<span class="close_control"></span>
+                                                </span>*@
+                                            </div>
+                                            <div class="breakfast">
+                                                <h2>Hàng ngày</h2>
+                                            </div>
+                                            <div class="lunch">
+                                                <h2>Hàng tuần</h2>
+                                            </div>
+                                            <div class="search-btn-line next-step">
+                                                <button type="submit" style="background-color: forestgreen; color: white; padding: 15px; border-radius: 10px">
+                                                    Lập kế
+                                                    hoạch
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row result-area" style="display: none;">
+                                        <div class="col-md-12"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS -->
+        <link href="~/assets/css/demo.css" rel="stylesheet">
+    </main>
+    </form>
+    <!-- Footer Area Start Here -->
+    <footer class="footer-area">
+        <div class="footer-widget-area">
+            <div class="container container-default custom-area">
+                <div class="row">
+                    <!-- First Column -->
+                    <div class="col-12 col-md-4 col-lg-4 col-custom">
+                        <div class="single-footer-widget m-0">
+                            <div class="footer-logo">
+                                <a href="index.html">
+                                    <img src="~/assets/images/logo/logo.png" alt="Logo Image" />
+                                </a>
+                            </div>
+                            <p class="desc-content">
+                                Calofit - Web lên thực đơn bữa ăn dinh dưỡng
+                            </p>
+                            <div class="social-links">
+                                <ul class="d-flex">
+                                    <li>
+                                        <a class="border rounded-circle" href="#" title="Facebook">
+                                            <i class="fa fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="border rounded-circle" href="#" title="Twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="border rounded-circle" href="#" title="Linkedin">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="border rounded-circle" href="#" title="Youtube">
+                                            <i class="fa fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="border rounded-circle" href="#" title="Vimeo">
+                                            <i class="fa fa-vimeo"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second Column -->
+                    <div class="col-12 col-md-4 col-lg-4 col-custom text-center d-flex align-items-center justify-content-center">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">Link</h2>
+                            <ul class="widget-list">
+                                <li><a href="blog-grid-fullwidth.html">Blog</a></li>
+                                <li><a href="recipe.html">Công thức nấu ăn</a></li>
+                                <li><a href="partners.html">Đối tác</a></li>
+                                <li><a href="pricing.html">Giá cả</a></li>
+                                <li><a href="meal-planner.html">Lập kế hoạch </a></li>
+                                <li><a href="contact-us.html">Liên hệ</a></li>
+                                <li><a href="nutrition.html">Phân tích dinh dưỡng</a></li>
+                                <li><a href="shop.html">Shop nguyên liệu</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Third Column -->
+                    <div class="col-12 col-md-4 col-lg-4 col-custom d-flex align-items-center justify-content-center">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">Thông tin thêm:</h2>
+                            <div class="widget-body">
+                                <address>
+                                    Đại học FPT Hà Nội, Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện Thạch
+                                    Thất, Hà
+                                    Nội<br />
+                                    Phone: 0399-092-221<br />
+                                    Email: nduyhieu210@gmail.com
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area">
+            <div class="container custom-area">
+                <div class="row">
+                    <div class="col-12 text-center col-custom">
+                        <div class="copyright-content">
+                            <p>
+                                Copyright © 2024 | Built by&nbsp;<strong>CaloFit</strong>&nbsp;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End Here -->
+    <!-- Scroll to Top Start -->
+    <a class="scroll-to-top" href="#">
+        <i class="ion-chevron-up"></i>
+    </a>
+    <!-- Scroll to Top End -->
+    <!-- JS
+    ============================================ -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Migrate JS -->
+    <script src="~/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- Modernizer JS -->
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- Slick Slider JS -->
+    <script src="~/assets/js/plugins/slick.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="~/assets/js/plugins/jquery.countdown.min.js"></script>
+    <!-- Ajax JS -->
+    <script src="~/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Nice Select JS -->
+    <script src="~/assets/js/plugins/jquery.nice-select.min.js"></script>
+    <!-- Jquery Ui JS -->
+    <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
+    <!-- jquery magnific popup js -->
+    <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const heading1 = document.getElementById('heading1');
+        const heading2 = document.getElementById('heading2');
+        const heading3 = document.getElementById('heading3');
+        const heading4 = document.getElementById('heading4');
+        const heading5 = document.getElementById('heading5');
+        const heading6 = document.getElementById('heading6');
+        const heading7 = document.getElementById('heading7');
+        const heading8 = document.getElementById('heading8');
+
+        const collapse1 = document.getElementById('collapse1');
+        const collapse2 = document.getElementById('collapse2');
+        const collapse3 = document.getElementById('collapse3');
+        const collapse4 = document.getElementById('collapse4');
+        const collapse5 = document.getElementById('collapse5');
+        const collapse6 = document.getElementById('collapse6');
+        const collapse7 = document.getElementById('collapse7');
+        const collapse8 = document.getElementById('collapse8');
+
+        const headings = [
+            heading1, heading2, heading3, heading4, heading5, heading6, heading7, heading8
+        ];
+
+        const buttons = document.querySelectorAll('.btn-link');
+
+        let activeButton = null;
+
+        buttons.forEach((button, index) => {
+            button.addEventListener("click", function () {
+                if (activeButton !== this) {
+                    if (activeButton) {
+                        activeButton.classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    activeButton = this;
+                }
+            });
+        });
+
+        let activeHeading = null;
+
+        headings.forEach((heading, index) => {
+            heading.addEventListener("click", function () {
+                if (activeHeading !== this) {
+                    if (activeHeading) {
+                        activeHeading.classList.remove('active');
+                        document.getElementById(`collapse${headings.indexOf(activeHeading) + 1}`).style.display = 'none';
+                    }
+                    this.classList.add('active');
+                    activeHeading = this;
+                    document.getElementById(`collapse${index + 1}`).style.display = 'block';
+                }
+            });
+        });
+
+        function hideAllCollapse() {
+            collapse1.style.display = 'none';
+            collapse2.style.display = 'none';
+            collapse3.style.display = 'none';
+            collapse4.style.display = 'none';
+            collapse5.style.display = 'none';
+            collapse6.style.display = 'none';
+            collapse7.style.display = 'none';
+            collapse8.style.display = 'none';
+        }
+
+        resFoods.forEach(item => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (!this.classList.contains("active")) {
+                    removeActiveClass(resRecipes);
+                    this.classList.add('active');
+                    foodsArea.style.display = 'inline-table';
+                    recipesArea.style.display = 'none';
+                }
+            });
+        });
+
+        resRecipes.forEach(item => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (!this.classList.contains("active")) {
+                    removeActiveClass(resFoods);
+                    this.classList.add('active');
+                    recipesArea.style.display = 'inline-table';
+                    foodsArea.style.display = 'none';
+                }
+            });
+        });
+
+        function removeActiveClass(elements) {
+            elements.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
+</script>
