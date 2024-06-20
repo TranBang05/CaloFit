@@ -16,7 +16,7 @@ namespace CalofitMVC.Controllers
         }
 
         // GET: ShopController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 1)
         {
             Product p = db.Products.Include(x => x.Ingredient).ThenInclude(x => x.Nutrition)
                 .Include(x => x.Ingredient).ThenInclude(x => x.Image)

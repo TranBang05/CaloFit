@@ -1,3 +1,4 @@
+using CalofitMVC.Models;
 using Microsoft.Win32;
 
 using Rotativa.AspNetCore;
@@ -13,6 +14,7 @@ namespace CalofitMVC
             // Configure services
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDbContext<CalofitDBContext>();
             // Add session
             builder.Services.AddSession(options =>
             {

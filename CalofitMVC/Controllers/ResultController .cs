@@ -110,6 +110,8 @@ namespace CalofitMVC.Controllers
             context.SaveChanges() ;
             context.MealPlans.RemoveRange(mealPlans);
             context.SaveChanges() ;
+
+            MealMap.Clear() ;
         }
 
         private void BuildMealPlan(int planId, int userId, int DietId, int times)
