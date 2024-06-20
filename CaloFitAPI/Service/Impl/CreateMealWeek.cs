@@ -48,41 +48,6 @@
 //                        recipeReponses = new recipeReponse
 //                        {
 
-<<<<<<< HEAD
-                            RecipeId = m.MealRecipes.RecipeId,
-                            RecipeName = m.MealRecipes.RecipeName,
-                            Servings = m.MealRecipes.Servings,
-                            CookTime = m.MealRecipes.CookTime,
-                            PrepTime = m.MealRecipes.PrepTime,
-                            Description = m.MealRecipes.Description,
-
-                            MenuId = m.MealRecipes.MenuId,
-                            userPreferences = m.MealRecipes.UserPreferences
-                    .Select(up => new UserPreferencesDto
-                    {
-                        UserPreferenceId = up.UserPreferenceId,
-                        UserId = up.UserId,
-                        DietId = up.DietId,
-                        FavoriteRecipesId = up.FavoriteRecipesId
-                    }).Where(up => up.DietId == request.DietId).
-                    ToList(),
-                            step = m.MealRecipes.Steps.Select(s => new StepDto
-                            {
-                                StepId = s.StepId,
-                                RecipeId = s.RecipeId,
-                                StepNumber = s.StepNumber,
-                                Description = s.Description,
-                                ImageId = s.ImageId
-                            }).ToList(),
-                            recipeIngredients = m.MealRecipes.RecipeIngredients
-                    .Select(ri => new recipeIngredientsDto
-                    {
-                        RecipeIngredientId = ri.RecipeIngredientId,
-                        RecipeId = ri.RecipeId,
-                        IngredientId = ri.IngredientId,
-                        ServingSizeId = ri.ServingSizeId
-                    }).ToList(),
-=======
 //                            RecipeId = m.MealRecipes.RecipeId,
 //                            RecipeName = m.MealRecipes.RecipeName,
 //                            Servings = m.MealRecipes.Servings,
@@ -116,7 +81,6 @@
 //                        IngredientId = ri.IngredientId,
 //                        ServingSizeId = ri.ServingSizeId
 //                    }).ToList(),
->>>>>>> master
 
 
 

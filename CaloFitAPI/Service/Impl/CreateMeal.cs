@@ -17,13 +17,8 @@
 
 
 
-<<<<<<< HEAD
-        public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
-        {
-=======
 //		public CreateMeal(CalofitDBContext context, IHttpContextAccessor httpContextAccessor)
 //        {
->>>>>>> master
 
 //            _context = context;
 //            _httpContextAccessor = httpContextAccessor;
@@ -32,49 +27,6 @@
 //        public List<CreateMealPlan> getMealDay(CreateRecipesRequest request)
 //        {
 
-<<<<<<< HEAD
-            var httpContext = _httpContextAccessor.HttpContext;
-
-            if (httpContext == null)
-            {
-                throw new InvalidOperationException("HttpContext is null.");
-            }
-
-            var session = httpContext.Session;
-            //var userId = session.GetInt32("user");
-            var userId = 1;
-
-            if (request.dailyorweek == "daily")
-            {
-                var mealPlans = _context.MealPlans
-                    .Include(mp => mp.Meals)
-                        .ThenInclude(m => m.MealRecipes)
-                            .ThenInclude(mr => mr.RecipeIngredients)
-                                .ThenInclude(ri => ri.ServingSize)
-                                    .ThenInclude(ss => ss.Ingredient)
-                                        .ThenInclude(i => i.Nutrition)
-                    .Include(mp => mp.Meals)
-                        .ThenInclude(m => m.MealRecipes)
-                            .ThenInclude(mr => mr.Steps)
-                    .Include(mp => mp.Meals)
-                        .ThenInclude(m => m.MealRecipes)
-                            .ThenInclude(mr => mr.UserPreferences)
-                                .ThenInclude(up => up.Diet)
-                    .Include(mp => mp.Meals)
-                        .ThenInclude(m => m.MealRecipes)
-                            .ThenInclude(mr => mr.RecipeAllergies)
-                                .ThenInclude(ra => ra.Allergy)
-                    .Where(mp => mp.PlanType == request.dailyorweek)
-                    .ToList();
-
-                var newMealPlan = new MealPlan
-                {
-                    UserId = (int)userId,
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now.AddDays(1),
-                    PlanType = request.dailyorweek
-                };
-=======
 //			var httpContext = _httpContextAccessor.HttpContext;
 
 //			if (httpContext == null)
@@ -118,7 +70,6 @@
 //                    EndDate = DateTime.Now.AddDays(1),
 //                    PlanType = request.dailyorweek
 //                };
->>>>>>> master
 
 
 //                _context.MealPlans.Add(newMealPlan);
@@ -127,61 +78,6 @@
 //                _context.SaveChanges();
 
 
-<<<<<<< HEAD
-                createMealPlans = mealPlans.Select(mp => new CreateMealPlan
-                {
-                    PlanId = newMealPlan.PlanId,
-                    CreateMeals = mp.Meals.Select(m => new CreateRecipeMeal
-                    {
-                        MealId = m.MealId,
-                        MealType = m.MealType,
-                        recipeReponses = new recipeReponse
-                        {
-                            RecipeId = m.MealRecipes.RecipeId,
-                            RecipeName = m.MealRecipes.RecipeName,
-                            Servings = m.MealRecipes.Servings,
-                            CookTime = m.MealRecipes.CookTime,
-                            PrepTime = m.MealRecipes.PrepTime,
-                            Description = m.MealRecipes.Description,
-
-                            MenuId = m.MealRecipes.MenuId,
-                            userPreferences = m.MealRecipes.UserPreferences
-                                .Select(up => new UserPreferencesDto
-                                {
-                                    UserPreferenceId = up.UserPreferenceId,
-                                    UserId = up.UserId,
-                                    DietId = up.DietId,
-                                    FavoriteRecipesId = up.FavoriteRecipesId
-                                }).Where(up => up.DietId == request.DietId)
-                                .ToList(),
-                            step = m.MealRecipes.Steps.Select(s => new StepDto
-                            {
-                                StepId = s.StepId,
-                                RecipeId = s.RecipeId,
-                                StepNumber = s.StepNumber,
-                                Description = s.Description,
-                                ImageId = s.ImageId
-                            }).ToList(),
-                            recipeIngredients = m.MealRecipes.RecipeIngredients
-                                .Select(ri => new recipeIngredientsDto
-                                {
-                                    RecipeIngredientId = ri.RecipeIngredientId,
-                                    RecipeId = ri.RecipeId,
-                                    IngredientId = ri.IngredientId,
-                                    ServingSizeId = ri.ServingSizeId
-                                }).ToList(),
-                            RecipeAllergies = m.MealRecipes.RecipeAllergies
-                                .Select(ra => new RecipeAllergyDto
-                                {
-                                    RecipeAllergyId = ra.RecipeAllergyId,
-                                    RecipeId = ra.RecipeId,
-                                    AllergyId = ra.AllergyId
-                                }).Where(p => p.RecipeAllergyId == request.Allergy)
-                                .ToList()
-                        }
-                    }).Take(3).ToList()
-                }).Take(1).ToList();
-=======
 //                 createMealPlans = mealPlans.Select(mp => new CreateMealPlan
 //                {
 //                    PlanId = newMealPlan.PlanId,
@@ -235,7 +131,6 @@
 //                        }
 //                    }).Take(3).ToList()
 //                }).Take(1).ToList();
->>>>>>> master
 
 
 
@@ -261,13 +156,8 @@
 
 //                            _context.Meals.Add(meal);
 
-<<<<<<< HEAD
-                            mealTypeIndex++;
-                        }
-=======
 //                            mealTypeIndex++; 
 //                        }
->>>>>>> master
 
 //                        _context.SaveChanges();
 //                    }
@@ -275,25 +165,9 @@
 
 //                return createMealPlans;
 
-<<<<<<< HEAD
-            }
-
-
-
-
-
-
-
-
-
-
-            else
-            {
-=======
 //            }
 //            else
 //            {
->>>>>>> master
 
 
 //                var mealPlans = _context.MealPlans
@@ -344,54 +218,6 @@
 //                            MealId = m.MealId,
 //                            MealType = m.MealType,
 
-<<<<<<< HEAD
-                            recipeReponses = new recipeReponse
-                            {
-                                RecipeId = m.MealRecipes.RecipeId,
-                                RecipeName = m.MealRecipes.RecipeName,
-                                Servings = m.MealRecipes.Servings,
-                                CookTime = m.MealRecipes.CookTime,
-                                PrepTime = m.MealRecipes.PrepTime,
-                                Description = m.MealRecipes.Description,
-                                //ImageId = m.MealRecipes.ImageId,
-                                MenuId = m.MealRecipes.MenuId,
-                                userPreferences = m.MealRecipes.UserPreferences
-                                    .Select(up => new UserPreferencesDto
-                                    {
-                                        UserPreferenceId = up.UserPreferenceId,
-                                        UserId = up.UserId,
-                                        DietId = up.DietId,
-                                        FavoriteRecipesId = up.FavoriteRecipesId
-                                    }).Where(up => up.DietId != request.DietId)
-                                    .ToList(),
-                                step = m.MealRecipes.Steps.Select(s => new StepDto
-                                {
-                                    StepId = s.StepId,
-                                    RecipeId = s.RecipeId,
-                                    StepNumber = s.StepNumber,
-                                    Description = s.Description,
-                                    ImageId = s.ImageId
-                                }).ToList(),
-                                recipeIngredients = m.MealRecipes.RecipeIngredients
-                                    .Select(ri => new recipeIngredientsDto
-                                    {
-                                        RecipeIngredientId = ri.RecipeIngredientId,
-                                        RecipeId = ri.RecipeId,
-                                        IngredientId = ri.IngredientId,
-                                        ServingSizeId = ri.ServingSizeId
-                                    }).ToList(),
-                                RecipeAllergies = m.MealRecipes.RecipeAllergies
-                                    .Select(ra => new RecipeAllergyDto
-                                    {
-                                        RecipeAllergyId = ra.RecipeAllergyId,
-                                        RecipeId = ra.RecipeId,
-                                        AllergyId = ra.AllergyId
-                                    }).Where(p => p.RecipeAllergyId == request.Allergy)
-                                    .ToList()
-                            }
-                        }).Take(3).ToList()
-                    }).Take(1).ToList();
-=======
 //                            recipeReponses = new recipeReponse
 //                            {
 //                                RecipeId = m.MealRecipes.RecipeId,
@@ -438,7 +264,6 @@
 //                            }
 //                        }).Take(3).ToList()
 //                    }).Take(1).ToList();
->>>>>>> master
 
 //                    int mealTypeIndex = 0;
 
@@ -462,13 +287,8 @@
 
 //                                _context.Meals.Add(meal);
 
-<<<<<<< HEAD
-                                mealTypeIndex++;
-                            }
-=======
 //                                mealTypeIndex++; 
 //                            }
->>>>>>> master
 
 //                            _context.SaveChanges();
 //                        }
@@ -481,26 +301,6 @@
 //            }
 
 
-<<<<<<< HEAD
-        }
-        public string GetMealType(int index)
-        {
-
-            switch (index % 3)
-            {
-                case 0:
-                    return "Sáng";
-                case 1:
-                    return "Trưa";
-                case 2:
-                    return "Tối";
-                default:
-                    throw new Exception("Unexpected index.");
-            }
-        }
-    }
-}
-=======
 //        }
 //        public string GetMealType(int index)
 //        {
@@ -519,4 +319,3 @@
 //        }
 //    }
 // }
->>>>>>> master
