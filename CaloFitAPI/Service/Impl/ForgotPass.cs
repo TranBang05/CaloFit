@@ -14,7 +14,7 @@ namespace CaloFitAPI.Service.Impl
         public bool Forgot(string username, string password,string repass)
         {
             // Check if a user with the provided username exists in the database
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            var user = _context.Users.FirstOrDefault(u => u.Email == username);
 
             if (user == null)
             {

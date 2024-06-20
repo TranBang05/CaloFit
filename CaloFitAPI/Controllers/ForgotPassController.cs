@@ -22,11 +22,10 @@ namespace CaloFitAPI.Controllers
 
 
 
-
-        [HttpPost("post")]
-        public IActionResult ForgotPassword(string username, string password, string repass)
+        [HttpPost]
+        public IActionResult ForgotPassword(string email, string password, string repass)
         {
-            var result = _forgot.Forgot(username, password, repass);
+            var result = _forgot.Forgot(email, password, repass);
 
             if (result)
             {

@@ -20,7 +20,7 @@ namespace CalofitMVC.Controllers
 
 
         private NewtonsoftJsonSerializer serializer;
-      
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -28,12 +28,9 @@ namespace CalofitMVC.Controllers
             serializer = new Flurl.Http.Newtonsoft.NewtonsoftJsonSerializer();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+  
 
-        public IActionResult Privacy()
+        public IActionResult Home()
         {
             return View();
         }
@@ -48,7 +45,7 @@ namespace CalofitMVC.Controllers
             try
             {
                 // Gọi API từ link để lấy danh sách Allergy
-                var recip = await linkrecipe.GetJsonAsync<List<RecipeRsp>>();
+                var recip = await linkrecipe.GetJsonAsync<List<reciperepon1>>();
                 return View(recip);
             }
             catch (FlurlHttpException ex)

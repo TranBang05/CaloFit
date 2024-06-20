@@ -37,7 +37,7 @@ namespace CalofitMVC.Controllers
 
 					if (HttpContext.Session.GetInt32("user") != null)
 					{
-				        return	RedirectToAction("Index", "Home");
+				        return	RedirectToAction("Home", "Home");
 					}
 					else
 					{
