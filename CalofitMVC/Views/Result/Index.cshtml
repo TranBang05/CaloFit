@@ -1,41 +1,57 @@
 ﻿@model List<MealPlan>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var currentDay = Convert.ToInt32(HttpContextAccessor.HttpContext.Request.Query["day"].FirstOrDefault() ?? "1"); // Get the current day from the query string, default to 1
+}
 <!-- Header Area End Here -->
 <div class="Tabs Plan__tabs">
-    @if (Context.Session.GetInt32("days") > 1)
-    {
-        <ul class="Tabs__head">
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="1" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 1</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="2" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 2</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="3" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 3</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="4" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 4</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="5" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 5</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="6" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 6</span></a></li>
-            <li class="Tab undefined"><a asp-action="Index" asp-route-day="7" asp-route-DietName="@ViewBag.DietId" class="Tab__link "><span>Ngày 7</span></a></li>
-        </ul>
-    }
+    <ul class="Tabs__head">
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="1" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 1 ? "Tab__active" : "")"><span>Ngày 1</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="2" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 2 ? "Tab__active" : "")"><span>Ngày 2</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="3" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 3 ? "Tab__active" : "")"><span>Ngày 3</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="4" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 4 ? "Tab__active" : "")"><span>Ngày 4</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="5" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 5 ? "Tab__active" : "")"><span>Ngày 5</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="6" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 6 ? "Tab__active" : "")"><span>Ngày 6</span></a></li>
+        <li class="Tab undefined"><a asp-action="Index" asp-route-day="7" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 7 ? "Tab__active" : "")"><span>Ngày 7</span></a></li>
+    </ul>
     <div class="Tabs__content">
-        <div class="meal-plans">
-            @foreach (var meal in ViewData["list"] as List<Meal>)
-            {
-                <div class="meal-plan">
+        @foreach (var meal in ViewData["list"] as List<Meal>)
+        {
+            <div class="Meal__content">
+                <div class="Meal">
                     <div class="recipe-list">
                         <div class="recipe-item">
-                            <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.MealRecipes.RecipeId">
+                            <div class="Meal__content__img">
                                 <img src="@meal.MealRecipes.Image.ImageFilename" alt="@meal.MealRecipesId">
-                            </a>
-                            <h3>@meal.MealRecipes.RecipeName</h3>
-                            <p>Servings: @meal.MealRecipes.Servings</p>
-                            <p>Cook Time: @meal.MealRecipes.CookTime</p>
-                            <p>Prep Time: @meal.MealRecipes.PrepTime </p>
-                            <p>Description: @meal.MealRecipes.Description</p>
+                            </div>
+                            <div class="Meal__content__desc">
+                                <h2 class="Meal__content__desc--heading">@meal.MealRecipes.RecipeName</h2>
+                            </div>
+                            <div class="Meal__content">
+                                <p>Cook Time: @meal.MealRecipes.CookTime</p>
+                                <p>Prep Time: @meal.MealRecipes.PrepTime </p>
+                                <p>Description: @meal.MealRecipes.Description</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.Tab__link');
 
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    tabLinks.forEach(l => l.classList.remove('Tab__active'));
+
+                    link.classList.add('Tab__active');
+                });
+            });
+        });
+    </script>
+</div>
 <!-- Scroll to Top Start -->
 <a class="scroll-to-top" href="#">
     <i class="ion-chevron-up"></i>
@@ -63,18 +79,6 @@
 <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
 <!-- jquery magnific popup js -->
 <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
-
+<link href="https://arimai.github.io/meal-planner/static/css/main.a9fa28ce.css" rel="stylesheet">
 <!-- Main JS -->
 <script src="~/assets/js/main.js"></script>
-
-<script>
-    const tabLinks = document.querySelectorAll('.Tab__link');
-
-    tabLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            tabLinks.forEach(l => l.classList.remove('Tab__active'));
-
-            link.classList.add('Tab__active');
-        });
-    });
-</script>
