@@ -31,11 +31,8 @@ namespace CaloFitAPI.Controllers
                 return BadRequest("Registration failed. Please check your input.");
             }
 
-            // Đăng ký thành công, chuyển hướng đến view "Success"
-            return RedirectToAction("Success");
+            return Ok();
         }
-
-     
 
     }
 

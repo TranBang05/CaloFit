@@ -16,7 +16,7 @@ namespace CaloFitAPI.Service.Impl
         public bool RegisterUser(string email, string password, string repass)
         {
             string randomUsername;
-            randomUsername = "user" + Guid.NewGuid().ToString("N");
+            randomUsername = "user1" + Guid.NewGuid().ToString("N");
             if (_context.Users.Any(u => u.Username == email || u.Email == repass))
             {
                 return false;

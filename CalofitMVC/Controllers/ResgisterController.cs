@@ -11,13 +11,17 @@ namespace CalofitMVC.Controllers
         {
             return View();
         }
-        private readonly string registerApiUrl = "https://calofitweb.azurewebsites.net/api/Register";
+        private readonly string registerApiUrl = "http://localhost:5150/api/Register";
 
 
         [HttpPost]
         public async Task<IActionResult> Index(string email, string password, string repass)
         {  // Check if passwords match
 
+            if (password != repass)
+            {
+                return Json(new { Message = "Passwords do not match" });
+            }
 
             try
             {
@@ -29,38 +33,27 @@ namespace CalofitMVC.Controllers
 
                 if (response.StatusCode == 200)
                 {
-                    var responseContent = await response.ResponseMessage.Content.ReadAsStringAsync();
-                    var jsonResponse = JObject.Parse(responseContent);
-                    int userId = jsonResponse.Value<int>("userId");
 
-                    HttpContext.Session.SetInt32("user", userId);
-
-                    if (HttpContext.Session.GetInt32("user") != null)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                            return Json(new { Message = "Khong thanh cong" });
-                        
-                    }
+                    return Json(new { Message = "thanh cong" });
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Registration failed. Please try again.");
-                    return View();
+
+
+
+                    return Json(new { Message = "loi" });
                 }
             }
             catch (FlurlHttpException ex)
             {
-                return Json(new { Message = "Khong thanh cong" });
+                return Json(new { Message = "API call failed: " + ex.Message });
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "An unexpected error occurred.");
-                return View();
+                return Json(new { Message = "An unexpected error occurred: " + ex.Message });
             }
         }
     }
+ }
 
-}
+
