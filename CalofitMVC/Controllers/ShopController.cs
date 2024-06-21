@@ -21,6 +21,9 @@ namespace CalofitMVC.Controllers
             Product p = db.Products.Include(x => x.Ingredient).ThenInclude(x => x.Nutrition)
                 .Include(x => x.Ingredient).ThenInclude(x => x.Image)
                 .FirstOrDefault(x => x.IngredientId ==  id);
+            Recipe recipe = db.Recipes.FirstOrDefault(x => x.RecipeId == 1);
+            @ViewData["des"] = "This is a dish";
+            ViewData["comment"] = recipe.Comments.ToList();
             return View("details", p);
         }
 

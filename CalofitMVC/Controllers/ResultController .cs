@@ -62,7 +62,7 @@ namespace CalofitMVC.Controllers
             ViewData["list"] = context.MealPlanManyToManies
                 .Where(x => x.Plan.UserId == userId).Include(x => x.Meal)
                 .ThenInclude(x => x.MealRecipes).ThenInclude(r => r.Image)
-                .Include(x => x.Meal.MealRecipes.Menu).ThenInclude(me => me.Diet).Select(x => x.Meal).Skip(rand.Next(0, 18)).Take(3)
+                .Include(x => x.Meal.MealRecipes.Menu).ThenInclude(me => me.Diet).Select(x => x.Meal).Skip((day - 1) * 3).Take(3)
                 .ToList();
 
             //Random rand = new Random();
@@ -83,6 +83,7 @@ namespace CalofitMVC.Controllers
             int dietId = int.Parse(f["diet"].ToString());
             int userId = HttpContext.Session.GetInt32("user") ?? 1;
             int days = (type == "daily") ? 1 : 7;
+            HttpContext.Session.SetInt32("days", days);
 
             deletePlan(userId);
 
