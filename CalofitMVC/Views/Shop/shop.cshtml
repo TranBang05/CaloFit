@@ -56,7 +56,7 @@
                                 <div class="single-product position-relative">
                                     <div class="product-image">
                                         <a class="d-block" asp-action="Details" asp-route-id="@p.IngredientId">
-                                            <img src="@p.Ingredient.Image.ImageFilename" alt="" class="product-image-1 w-100">
+                                        <img src="@p.Ingredient.Image.ImageFilename" alt="" class="product-image-1 w-100" height="350">
                                             @* <img src="assets/images/product/2.jpg" alt=""
                                                  class="product-image-2 position-absolute w-100"> *@
                                         </a>
@@ -82,9 +82,6 @@
                                     <div class="add-action d-flex position-absolute">
                                         <a asp-action="Cart" asp-route-id="@p.IngredientId" title="Add To cart">
                                             <i class="ion-bag"></i>
-                                        </a>
-                                        <a href="compare.html" title="Compare">
-                                            <i class="ion-ios-loop-strong"></i>
                                         </a>
                                         <a href="wishlist.html" title="Add To Wishlist">
                                             <i class="ion-ios-heart-outline"></i>
@@ -300,12 +297,11 @@
                                 </div>
                             </div>
                         </div>
-                </div>
                 </aside>
-                <!-- Sidebar Widget End -->
+            </div>
+            <!-- Sidebar Widget End -->
             </div>
         </div>
-    </div>
     </div>
     <!-- Shop Main Area End Here -->
     <!-- Support Area Start Here -->
@@ -319,7 +315,7 @@
                             <p class="desc-content">Liên hệ với chúng tôi 24/7 tại 0399-092-221</p>
                         </div>
                         <div class="support-button d-flex align-items-center">
-                            <a class="obrien-button primary-btn" href="contact-us.html">Liên hệ ngay</a>
+                        <a class="obrien-button primary-btn" href="/Contact/Contact">Liên hệ ngay</a>
                         </div>
                     </div>
                 </div>
