@@ -2863,6 +2863,9 @@ button,
 
 /*-- Shop Toolbar Area End Here --*/
 /*-- Shop Product Wrapper Start --*/
+.vh-40 {
+    height: 40vh !important
+}
 .shop_wrapper.grid_list .single-product {
   display: -webkit-box;
   display: -webkit-flex;
