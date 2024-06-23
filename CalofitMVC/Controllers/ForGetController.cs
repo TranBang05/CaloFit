@@ -5,13 +5,15 @@ using Newtonsoft.Json.Linq;
 using System.Security.Policy;
 using CalofitMVC.Models;
 using NuGet.Protocol.Plugins;
+using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 
 namespace CalofitMVC.Controllers
 {
     public class ForGetController : Controller
     {
 
-        private readonly string lApiUrl = "https://calofitweb.azurewebsites.net/api/ForgotPass";
+        private readonly string lApiUrl = BaseURLEnum.BASE_URL.GetDescription() + "/api/ForgotPass";
 
         public IActionResult ForGet()
         {

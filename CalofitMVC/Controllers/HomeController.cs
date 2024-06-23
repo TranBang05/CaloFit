@@ -1,4 +1,6 @@
-﻿using CalofitMVC.Models;
+﻿using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
+using CalofitMVC.Models;
 using CalofitMVC.Resp;
 using Flurl;
 using Flurl.Http;
@@ -12,11 +14,11 @@ namespace CalofitMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public string linkrecipe = "https://calofitweb.azurewebsites.net/api/Diet/recipe";
-        public string link = "https://calofitweb.azurewebsites.net/api/Carts/User";
-        public string linkdiet = "https://calofitweb.azurewebsites.net/api/Diet";
-        public string linkall = "https://calofitweb.azurewebsites.net/api/Alllergic";
-        public string createrecipe = "https://calofitweb.azurewebsites.net/api/CreateMealMenuDay";
+        public string linkrecipe = BaseURLEnum.BASE_URL.GetDescription() + "/api/Diet/recipe";
+        public string link = BaseURLEnum.BASE_URL.GetDescription() + "/api/Carts/User";
+        public string linkdiet = BaseURLEnum.BASE_URL.GetDescription() + "/api/Diet";
+        public string linkall = BaseURLEnum.BASE_URL.GetDescription() + "/api/Alllergic";
+        public string createrecipe = BaseURLEnum.BASE_URL.GetDescription() + "/api/CreateMealMenuDay";
 
 
         private NewtonsoftJsonSerializer serializer;

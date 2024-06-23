@@ -2,6 +2,8 @@
 using Flurl;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 
 namespace CalofitMVC.Controllers
 {
@@ -11,7 +13,7 @@ namespace CalofitMVC.Controllers
         {
             return View();
         }
-        private readonly string registerApiUrl = "http://localhost:5150/api/Register";
+        private readonly string registerApiUrl = BaseURLEnum.BASE_URL.GetDescription() + "/api/Register";
 
 
         [HttpPost]

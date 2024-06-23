@@ -49,7 +49,7 @@ namespace CalofitMVC
 
             app.MapControllerRoute(
          name: "default",
-         pattern: "{controller=Result}/{action=Index}");
+         pattern: "{controller=Login}/{action=Index}");
 
 
 

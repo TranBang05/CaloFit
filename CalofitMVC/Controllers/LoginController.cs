@@ -3,12 +3,14 @@ using Flurl.Http;
 using System.Threading.Tasks;
 using Flurl;
 using Newtonsoft.Json.Linq;
+using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 
 namespace CalofitMVC.Controllers
 {
 	public class LoginController : Controller
 	{
-		private readonly string loginApiUrl = "https://calofitweb.azurewebsites.net/api/Login";
+		private readonly string loginApiUrl = BaseURLEnum.BASE_URL.GetDescription() + "/api/Login";
 
 		public IActionResult Index()
 		{

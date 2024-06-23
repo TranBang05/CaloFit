@@ -1,4 +1,5 @@
-﻿using CalofitMVC.EnumMVC;
+﻿using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 using CalofitMVC.Models;
 using CalofitMVC.Resp;
 using Flurl;
@@ -16,7 +17,7 @@ namespace CalofitMVC.Controllers
     {
 
 
-        public string baseUrl = "https://calofitweb.azurewebsites.net/api/CreateMealMenuDay";
+        public string baseUrl = BaseURLEnum.BASE_URL.GetDescription() + "/api/CreateMealMenuDay";
 
         private NewtonsoftJsonSerializer serializer;
         CalofitDBContext context;

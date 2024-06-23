@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using Flurl.Http;
 using CalofitMVC.Models;
 using Microsoft.EntityFrameworkCore;
+using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 
 namespace CalofitMVC.Controllers
 {
     public class RecipeController : Controller
     {
 
-        public string link = "https://calofitweb.azurewebsites.net/api/Diet/recipe";
+        public string link = BaseURLEnum.BASE_URL.GetDescription() + "/api/Diet/recipe";
         private NewtonsoftJsonSerializer serializer;
         private CalofitDBContext context;
         public RecipeController(CalofitDBContext context)

@@ -6,13 +6,16 @@
 <!-- Header Area End Here -->
 <div class="Tabs Plan__tabs">
     <ul class="Tabs__head">
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="1" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 1 ? "Tab__active" : "")"><span>Ngày 1</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="2" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 2 ? "Tab__active" : "")"><span>Ngày 2</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="3" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 3 ? "Tab__active" : "")"><span>Ngày 3</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="4" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 4 ? "Tab__active" : "")"><span>Ngày 4</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="5" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 5 ? "Tab__active" : "")"><span>Ngày 5</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="6" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 6 ? "Tab__active" : "")"><span>Ngày 6</span></a></li>
-        <li class="Tab undefined"><a asp-action="Index" asp-route-day="7" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 7 ? "Tab__active" : "")"><span>Ngày 7</span></a></li>
+        @if (Context.Session.GetInt32("days") > 1)
+        {
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="1" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 1 ? "Tab__active" : "")"><span>Ngày 1</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="2" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 2 ? "Tab__active" : "")"><span>Ngày 2</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="3" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 3 ? "Tab__active" : "")"><span>Ngày 3</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="4" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 4 ? "Tab__active" : "")"><span>Ngày 4</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="5" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 5 ? "Tab__active" : "")"><span>Ngày 5</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="6" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 6 ? "Tab__active" : "")"><span>Ngày 6</span></a></li>
+            <li class="Tab undefined"><a asp-action="Index" asp-route-day="7" asp-route-DietName="@ViewBag.DietId" class="Tab__link @(currentDay == 7 ? "Tab__active" : "")"><span>Ngày 7</span></a></li>
+        }
     </ul>
     <div class="Tabs__content">
         @foreach (var meal in ViewData["list"] as List<Meal>)
@@ -22,7 +25,7 @@
                     <div class="recipe-list">
                         <div class="recipe-item">
                             <div class="Meal__content__img">
-                                <img src="@meal.MealRecipes.Image.ImageFilename" alt="@meal.MealRecipesId">
+                                <a asp-controller="Recipe" asp-action="Details" asp-route-id="@meal.MealRecipes.RecipeId"><img src="@meal.MealRecipes.Image.ImageFilename" alt="@meal.MealRecipesId"></a>
                             </div>
                             <div class="Meal__content__desc">
                                 <h2 class="Meal__content__desc--heading">@meal.MealRecipes.RecipeName</h2>

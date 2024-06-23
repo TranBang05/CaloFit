@@ -1,4 +1,6 @@
 ﻿using CaloFitAPI.Dto.Request;
+using CalofitMVC.Common;
+using CalofitMVC.EnumMVC;
 using CalofitMVC.Models;
 using Flurl;
 using Flurl.Http;
@@ -14,7 +16,7 @@ namespace CalofitMVC.Controllers
 {
     public class CartController : Controller
     {
-        public string link = "https://calofitweb.azurewebsites.net/api/Carts";
+        public string link = BaseURLEnum.BASE_URL.GetDescription() + "/api/Carts";
         private NewtonsoftJsonSerializer serializer;
         public CartController()
         {
