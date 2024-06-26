@@ -45,7 +45,7 @@ namespace CaloFitAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
                 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(config.GetConnectionString("LoadDB"));
+                optionsBuilder.UseMySql(config.GetConnectionString("LoadDB"), ServerVersion.AutoDetect(config.GetConnectionString("LoadDB")));
             }
         }
 
