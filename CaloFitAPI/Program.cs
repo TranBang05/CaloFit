@@ -26,11 +26,11 @@ builder.Services.AddControllersWithViews().AddOData(opt => opt
     ).AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-builder.Services.AddDbContext<CalofitDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LoadDB")));
+builder.Services.AddDbContext<CalofitDBContext>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 builder.Services.AddScoped<ILogins, Login>();
 builder.Services.AddScoped<ISignup, SignUp>();
@@ -54,6 +54,13 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 // Cấu hình middleware và dịch vụ trong ứng dụng
 
