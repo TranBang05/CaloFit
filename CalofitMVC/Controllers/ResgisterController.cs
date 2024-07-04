@@ -31,6 +31,7 @@ namespace CalofitMVC.Controllers
             {
                 return Json(new { Message = "Passwords do not match" });
             }
+            user.Role = "user";
             context.Users.Add(user);
             context.SaveChanges();
             HttpContext.Session.SetInt32("user", user.UserId);
