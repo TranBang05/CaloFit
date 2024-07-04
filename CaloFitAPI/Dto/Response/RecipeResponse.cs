@@ -3,7 +3,8 @@
 namespace CaloFitAPI.Dto.Response
 {
     public class RecipeResponse
-    {  public string RecipeName { get; set; } = null!;
+    {public int RecipeId { get; set; }
+        public string RecipeName { get; set; } = null!;
     public int Servings { get; set; }
     public int CookTime { get; set; }
     public int PrepTime { get; set; }

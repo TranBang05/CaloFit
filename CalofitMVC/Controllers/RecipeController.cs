@@ -11,34 +11,34 @@ using CalofitMVC.EnumMVC;
 
 namespace CalofitMVC.Controllers
 {
-    public class RecipeController : Controller
-    {
+	public class RecipeController : Controller
+	{
 
-        public string link = BaseURLEnum.BASE_URL.GetDescription() + "/api/Diet/recipe";
-        private NewtonsoftJsonSerializer serializer;
-        private CalofitDBContext context;
-        public RecipeController(CalofitDBContext context)
-        {
-            this.context = context;
-            serializer = new Flurl.Http.Newtonsoft.NewtonsoftJsonSerializer();
-        }
-      
-        public ActionResult Index()
-        {
-            List<recipeReponse> recipe = link.AppendPathSegment(null)
-               .WithSettings(s => s.JsonSerializer = serializer)
-               .GetJsonAsync<List<recipeReponse>>().Result;
-            return View(recipe);
-        }
+		public string link = BaseURLEnum.BASE_URL.GetDescription() + "/api/Diet/recipe";
+		private NewtonsoftJsonSerializer serializer;
+		private CalofitDBContext context;
+		public RecipeController(CalofitDBContext context)
+		{
+			this.context = context;
+			serializer = new Flurl.Http.Newtonsoft.NewtonsoftJsonSerializer();
+		}
 
-        public ActionResult Details(int id = 1)
-        {
-            Recipe recipe = context.Recipes.Include(x => x.Image)
-                .Include(x => x.RecipeIngredients).ThenInclude(x => x.Ingredient)
-                .Include(x => x.Steps).ThenInclude(x => x.Image)
-                .FirstOrDefault(x => x.RecipeId == id);
-            return View("Details", recipe);
-        }
+		public ActionResult Index()
+		{
+			List<recipeReponse> recipe = link.AppendPathSegment(null)
+			   .WithSettings(s => s.JsonSerializer = serializer)
+			   .GetJsonAsync<List<recipeReponse>>().Result;
+			return View(recipe);
+		}
 
-    }
+		public ActionResult Details(int id)
+		{
+			Recipe recipe = context.Recipes.Include(x => x.Image)
+				.Include(x => x.RecipeIngredients).ThenInclude(x => x.Ingredient)
+				.Include(x => x.Steps).ThenInclude(x => x.Image)
+				.FirstOrDefault(x => x.RecipeId == id);
+			return View("Details", recipe);
+		}
+
+	}
 }
