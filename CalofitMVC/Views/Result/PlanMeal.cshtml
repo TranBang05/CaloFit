@@ -43,25 +43,20 @@
                                     <div class="row begin-area">
                                         <div class="col-md-3 left-col">
                                             <div class="card-header" id="heading1">
-                                                <h2><b>Bước 1:</b> Chọn số bữa mỗi ngày:</h2>
+                                                <h2><b>Bước 1:</b> Mức độ vận động của bạn thế nào ?</h2>
                                                 <h5 class="mb-0">
-                                                    <a class="btn btn-link">Các bữa mỗi ngày</a>
+                                                    <a class="btn btn-link">Mức độ vận động</a>
                                                 </h5>
                                             </div>
                                             <div class="card-header" id="heading2" style="display: block;">
-                                                <h2><b>Step 2:</b> Bộ lọc chọn cho mỗi bữa:</h2>
+                                                <h2><b>Bước 2:</b> Chọn mục đích</h2>
                                                 @* <h5 class="mb-0">
                                                     <a class="btn btn-link">Dị ứng</a>
                                                 </h5> *@
                                             </div>
                                             <div class="card-header" id="heading3" style="display: block;">
                                                 <h5 class="mb-0">
-                                                    <a class="btn btn-link">Chế độ ăn</a>
-                                                </h5>
-                                            </div>
-                                            <div class="card-header" id="heading4" style="display: block;">
-                                                <h5 class="mb-0">
-                                                    <a class="btn btn-link">Calo</a>
+                                                    <a class="btn btn-link">Mục đích</a>
                                                 </h5>
                                             </div>
 @*                                             <div class="card-header" id="heading5" style="display: block;">
@@ -89,87 +84,96 @@
 
                                             <div id="collapse1" style="display: none;">
                                                 <div class="card-body">
-                                                    <h2>Bữa mỗi ngày</h2>
-                                                    <div class="desc row">
-                                                        <div class="col-md-4 health-check-meal">
-                                                            <label class="checkbox-button">
-                                                                <input type="checkbox"
-                                                                       class="healt checkbox-button__input"
-                                                                       value="Breakfast" name="bf">
-                                                                <span class="checkbox-button__control"></span>
-                                                                <span class="checkbox-button__label">Bữa sáng</span>
-                                                                <span class="control-info tooltip3"
-                                                                      title="Breakfast"></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-4 health-check-meal">
-                                                            <label class="checkbox-button">
-                                                                <input type="checkbox"
-                                                                       class="healt checkbox-button__input" value="Lunch" name="lunch">
-                                                                <span class="checkbox-button__control"></span>
-                                                                <span class="checkbox-button__label">Bữa trưa</span>
-                                                                <span class="control-info tooltip3"
-                                                                      title="Lunch"></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-4 health-check-meal">
-                                                            <label class="checkbox-button">
-                                                                <input type="checkbox"
-                                                                       class="healt checkbox-button__input" value="Dinner">
-                                                                <span class="checkbox-button__control"></span>
-                                                                <span class="checkbox-button__label">Bữa tối</span>
-                                                                <span class="control-info tooltip3"
-                                                                      title="Dinner"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="collapse3" style="display: none;">
-                                                <div class="card-body">
-                                                    <h2>Diets</h2>
-                                                    <div class="desc row">
-                                                    @foreach(Diet diet in ViewData["diet"] as List<Diet>)
-                                                    {
-                                                        <div class="col-md-4 health-check">
+                                                    <h2>Mức độ vận động</h2>
+                                                    <div class="desc col">
+                                                        <div class="row-md-3 health-check-meal">
                                                             <label class="checkbox-button">
                                                                 <input type="radio"
                                                                        class="healt checkbox-button__input"
-                                                                       value="@diet.Id" name="diet">
+                                                                       value="rare" name="act">
                                                                 <span class="checkbox-button__control"></span>
-                                                                <span class="checkbox-button__label">@diet.DietName</span>
+                                                                <span class="checkbox-button__label">Ít hoặc không hoạt động</span>
                                                                 <span class="control-info tooltip3"
-                                                                      title="No alcohol used or contained"></span>
+                                                                      title="Hầu hết thời gian ngồi suốt cả ngày (ví dụ: Công việc ngồi văn phòng, nhân viên ngân hàng)"></span>
                                                             </label>
                                                         </div>
-                                                    }
-                                                </div>
+                                                        <div class="row-md-3 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="radio"
+                                                                       class="healt checkbox-button__input" value="light" name="act">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Hoạt động nhẹ nhàng</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Hầu hết thời gian đứng suốt cả ngày (ví dụ: Nhân viên bán hàng, Giáo viên)"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row-md-3 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="radio"
+                                                                       class="healt checkbox-button__input" value="moderate" name="act">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Hoạt động vừa phải</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Hầu hết thời gian đi bộ hoặc thực hiện các hoạt động thế chất (ví dụ hướng dẫn viên)"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row-md-3 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="radio"
+                                                                       class="healt checkbox-button__input" value="adhd" name="act">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Hoạt động mạnh</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Hầu hết thời gian thực hiện các hoạt động thể chất nặng suốt cả ngày (Công nhân, vận chuyển)"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div id="collapse4" style="display: none;">
+                                            <div id="collapse3" style="display: none;">
                                                 <div class="card-body">
-                                                    <h2>Daily Budget</h2>
-                                                    <div class="desc cal">
-                                                        Default value is selected base on min 1600 and
-                                                        max 2000 calorie diet. Please enter your preferred min/max
-                                                        values.
-                                                    </div>
-                                                    <!--input type="text" class="search cal"/> kcal -->
-                                                    <div class="mdesc-cal">
-                                                        <div class="range-slider">
-                                                            <span class="mdescs">
-                                                                min <input type="text" value="1000"
-                                                                           class="search nut min"> max <input type="text"
-                                                                                                              value="2000" class="search nut max"> kcal
-                                                            </span>
-                                                        </div>
-                                                        <div class="range-check cal-check check-contain">
+                                                    <h2>Mục tiêu của bạn </h2>
+                                                    <div class="desc row">
+                                                        <div class="col-md-4 health-check-meal">
                                                             <label class="checkbox-button">
                                                                 <input type="checkbox"
-                                                                       class="nutrient-check checkbox-button__input"
-                                                                       value="calories" data-measure="kcal">
+                                                                       class="healt checkbox-button__input"
+                                                                       value="loss" name="goal">
                                                                 <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Giảm cân</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Gợi ý các món ăn chứa ít tinh bột, chất béo"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input" value="disease" name="goal">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Phòng bệnh</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Xây dựng thực đơn có nhiều dinh dưỡng"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input" value="maintain" name="goal">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Giữ dáng</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Xây dựng thực đơn cân bằng"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 health-check-meal">
+                                                            <label class="checkbox-button">
+                                                                <input type="checkbox"
+                                                                       class="healt checkbox-button__input" value="build" name="goal">
+                                                                <span class="checkbox-button__control"></span>
+                                                                <span class="checkbox-button__label">Tập luyện</span>
+                                                                <span class="control-info tooltip3"
+                                                                      title="Xây dựng thực đơn nhiều chất đạm, protein"></span>
                                                             </label>
                                                         </div>
                                                     </div>

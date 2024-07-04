@@ -23,6 +23,9 @@ namespace CalofitMVC.Models
         public string Email { get; set; } = null!;
         public string Role { get; set; } = null!;
         public DateTime RegistrationDate { get; set; }
+        public string? Gender { get; set; }
+        public float? Weight { get; set; }
+        public float? Height { get; set; }
 
         public virtual ICollection<Allergy> Allergies { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }

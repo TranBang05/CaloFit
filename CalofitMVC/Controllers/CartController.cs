@@ -23,7 +23,7 @@ namespace CalofitMVC.Controllers
             serializer = new Flurl.Http.Newtonsoft.NewtonsoftJsonSerializer();
         }
         // GET: CartController
-        public ActionResult Index(int userid = 1)
+        public ActionResult Index(int userid)
         {
             List<Cart> carts = getAll(userid);
             ViewData["list"] = carts;
@@ -65,7 +65,7 @@ namespace CalofitMVC.Controllers
                 List<Cart> carts = getAll(cart.Userid);
                 if(carts.FirstOrDefault(x => x.Productid == cart.Productid) != null)
                 {
-                    return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
+                    return RedirectToAction("Index", new { userid = HttpContext.Session.GetInt32("user") });
                 }
                 var abc = link.WithSettings(s => s.JsonSerializer = serializer)
                     .PostJsonAsync(cart);
@@ -76,7 +76,7 @@ namespace CalofitMVC.Controllers
                 var err = ex.GetResponseJsonAsync<Exception>(); // or GetResponseStringAsync(), etc.
                 Console.WriteLine($"Error returned from {ex.Call.Request.Url}: {err.Result.Message}");
             }
-            return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
+            return RedirectToAction("Index", new { userid = HttpContext.Session.GetInt32("user")});
         }
         public ActionResult ShopList(int userId)
         {
@@ -122,7 +122,7 @@ namespace CalofitMVC.Controllers
             int userid = HttpContext.Session.GetInt32("user") ?? 1;
             var abc = await link.AppendPathSegments(productId, userid).DeleteAsync();
             TempData["mess"] = "deleted item";
-            return RedirectToAction("Index", HttpContext.Session.GetInt32("user"));
+            return RedirectToAction("Index", new { userid = HttpContext.Session.GetInt32("user") });
         }
 
         // POST: CartController/Delete/5

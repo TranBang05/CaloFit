@@ -12,7 +12,7 @@ namespace CalofitMVC.Models
 
         public int MealId { get; set; }
         public string? MealType { get; set; }
-        public DateTime? MealDate { get; set; }
+        public DateOnly? MealDate { get; set; }
         public int MealRecipesId { get; set; }
 
         public virtual Recipe MealRecipes { get; set; } = null!;

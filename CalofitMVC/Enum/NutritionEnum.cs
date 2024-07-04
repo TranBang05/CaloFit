@@ -3,7 +3,7 @@
     public enum NutritionEnum
     {
         CaloMin = 2000,
-        CaloMax = 2800,
+        CaloMax = 2400,
         ProteinMin = 51,
         ProteinMax = 64,
         CarboMax = 150,
