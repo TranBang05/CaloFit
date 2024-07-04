@@ -73,9 +73,9 @@
                                 </div>
                                 <div class="single-input-item mb-3">
                                     <select asp-for="Gender">
-                                        <option value="" disabled selected>Enter biological gender</option>>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="" disabled selected>Giới tính</option>>
+                                        <option value="Male">Nam</option>
+                                        <option value="Female">Nữ</option>
                                     </select>
                                 </div>
                                 <div class="single-input-item mb-3">
@@ -89,9 +89,10 @@
                                     <label class="custom-control-label">Dị ứng ?</label><br />
                                     @foreach (Allergy al in ViewData["fuck"] as List<Allergy>)
                                     {
-                                        <input type="checkbox" name="allergy" value="@al.AllergyId" >
-                                        <label>@al.Allergen</label><br />
+                                        <input type="checkbox" class="custom-control-input" name="allergy" value="@al.AllergyId" id="allergy_@al.AllergyId">
+                                        <label for="allergy_@al.AllergyId">@al.Allergen</label>
 
+                                        <br />
                                     }
                                 </div>
                                 <div class="single-input-item mb-3">
@@ -100,8 +101,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="rememberMe">
                                                 <label class="custom-control-label" for="rememberMe">
-                                                    Nhận thông tin mới nhất
-                                                    của chúng tôi
+                                                    Nhận thông tin mới nhất của chúng tôi
                                                 </label>
                                             </div>
                                         </div>
